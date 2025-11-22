@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title> reallovepreem</title>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
+  <!-- Import fonts for the menu buttons to look good -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Kanit:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    /* --- Base page --- */
+    body {
+      background: #000;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Kanit', system-ui, sans-serif;
+      
+    }
+
+    /* --- GAME MENU (RIGHT SIDE) --- */
+    .game-menu-container {
+        position: fixed;
+        right: 20px;
+        bottom: 550px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 1000;
+        width: 170px;
+    }
+
+    .menu-label {
+        color: #696969;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: -2px;
+        text-align: right;
+        opacity: 0.7;
+    }
+
+    .game-btn {
+        position: relative;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    .game-btn span {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 12px;
+        z-index: 2;
+    }
+
+    /* Neon Glow Effect on Hover */
+    .game-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(6, 182, 212, 0.8);
+        box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+        transform: translateX(-5px);
+    }
+
+    .game-btn::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 0%; height: 100%;
+        background: linear-gradient(90deg, rgba(6,182,212,0.2), transparent);
+        transition: width 0.3s;
+        z-index: 1;
+    }
+
+    .game-btn:hover::before {
+        width: 100%;
+    }
+
+    /* Colorful Neon Block Icon Style */
+    .menu-icon-block {
+        width: 14px;
+        height: 14px;
+        background: linear-gradient(135deg, #06b6d4, #ec4899); /* Cyan to Pink */
+        border-radius: 3px;
+        box-shadow: 0 0 8px rgba(236, 72, 153, 0.8); /* Pink Glow */
+        z-index: 2;
+        position: relative;
+        border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    /* Placeholder for future games */
+    .game-btn.coming-soon {
+        opacity: 0.4;
+        cursor: default;
+        border-style: dashed;
+        background: transparent;
+    }
+    .game-btn.coming-soon:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* --- Love words Animation --- */
+    #ui .love {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -225px 0 0 -225px;
+      --i: 1;
+      pointer-events: none;
+    }
+    #ui .love:last-child .love_word {
+      color: #fff;
+      font-size: 2rem;
+      text-shadow: 0 0 10px #ea80b0;
+    }
+    #ui .love:last-child .love_word {
+        color: #ea80b0;
+        font-size: 1.4rem;
+        text-shadow: 0 0 10px #fff;
+    }
+
+    #ui .love_word {
+      color: #ea80b0;
+      font-size: 1.4rem;
+      transform: translateY(-100%) rotateZ(-30deg);
+      text-shadow: 0 0 10px #fff;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+    #ui .love_horizontal {
+      animation: horizontal 10000ms infinite alternate ease-in-out;
+      animation-delay: calc(var(--i) * -300ms);
+    }
+    #ui .love_vertical {
+      animation: vertical 20000ms infinite linear;
+      animation-delay: calc(var(--i) * -300ms);
+    }
+
+    @keyframes horizontal {
+      from { transform: translateX(0px); }
+      to   { transform: translateX(450px); }
+    }
+    @keyframes vertical {
+      0%   { transform: translateY(180px); }
+      10%  { transform: translateY(45px); }
+      15%  { transform: translateY(4.5px); }
+      18%  { transform: translateY(0px); }
+      20%  { transform: translateY(4.5px); }
+      22%  { transform: translateY(34.61538px); }
+      24%  { transform: translateY(64.28571px); }
+      25%  { transform: translateY(112.5px); }
+      26%  { transform: translateY(64.28571px); }
+      28%  { transform: translateY(34.61538px); }
+      30%  { transform: translateY(4.5px); }
+      32%  { transform: translateY(0px); }
+      35%  { transform: translateY(4.5px); }
+      40%  { transform: translateY(45px); }
+      50%  { transform: translateY(180px); }
+      71%  { transform: translateY(428.57143px); }
+      72.5%{ transform: translateY(441.17647px); }
+      75%  { transform: translateY(450px); }
+      77.5%{ transform: translateY(441.17647px); }
+      79%  { transform: translateY(428.57143px); }
+      100% { transform: translateY(180px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animation Container -->
+  <div id="ui"></div>
+
+  <!-- Right Side Game Menu -->
+  <div class="game-menu-container">
+      <div class="menu-label">GAMES LIST</div>
+      
+      <!-- Link to Real Blck Game -->
+      <a href="real-blck.html" class="game-btn">
+          <span>REAL BLCK</span>
+          <!-- Replaced SVG icon with Colorful Neon Block -->
+          <div class="menu-icon-block"></div>
+      </a>
+
+      <!-- Space for Future Game 1 -->
+      <!-- <a href="#" class="game-btn coming-soon">
+          <span>COMING SOON</span>
+      </a> -->
+      
+      <!-- Space for Future Game 2 -->
+      <!-- <a href="#" class="game-btn coming-soon">
+          <span>...</span>
+      </a> -->
+  </div>
+
+  <script>
+    const N = 100; 
+    const ui = document.getElementById('ui');
+
+    for (let i = 1; i <= N; i++) {
+      const love = document.createElement('div');
+      love.className = 'love';
+      love.style.setProperty('--i', i);
+
+      const h = document.createElement('div');
+      h.className = 'love_horizontal';
+
+      const v = document.createElement('div');
+      v.className = 'love_vertical';
+
+      const word = document.createElement('div');
+      word.className = 'love_word';
+      word.textContent = 'Real love Preem';
+
+      v.appendChild(word);
+      h.appendChild(v);
+      love.appendChild(h);
+      ui.appendChild(love);
+    }
+  </script>
+</body>
+</html>
