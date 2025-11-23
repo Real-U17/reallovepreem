@@ -5,33 +5,27 @@
   <meta charset="UTF-8" />
   <title>reallovepreem</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Kanit:wght@300;400&display=swap" rel="stylesheet">
-  
   <style>
-    /* --- Base page --- */
     body, html {
       height: 100vh;
       margin: 0;
       padding: 0;
       overflow: hidden;
       font-family: 'Kanit', system-ui, sans-serif;
-      background-color: #05000a; /* Dark background */
+      background-color: #05000a;
     }
 
-    /* --- BACKGROUND CANVAS (Pink Meteors) --- */
     #star-canvas {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 0; /* Layer 0: Behind everything */
+        z-index: 0;
         pointer-events: none;
     }
 
-    /* --- LOVE ANIMATION CONTAINER --- */
     #ui {
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
@@ -39,11 +33,10 @@
         pointer-events: none; 
     }
 
-    /* --- GAME MENU --- */
     .game-menu-container {
         position: fixed;
         right: 20px;
-        bottom: 550px; /* Desktop Position */
+        bottom: 550px;
         display: flex;
         flex-direction: column;
         gap: 12px;
@@ -52,7 +45,7 @@
     }
 
     .menu-label {
-        color: #ffb6c1; /* Soft pink label */
+        color: #ffb6c1;
         font-size: 10px;
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -65,9 +58,8 @@
     .game-btn {
         position: relative;
         padding: 12px 15px;
-        /* PINK GLASS STYLE */
-        background: rgba(255, 20, 147, 0.15); /* Pink tint background */
-        border: 1px solid rgba(255, 105, 180, 0.5); /* Pink border */
+        background: rgba(255, 20, 147, 0.15);
+        border: 1px solid rgba(255, 105, 180, 0.5);
         backdrop-filter: blur(5px);
         color: #fff;
         text-decoration: none;
@@ -87,7 +79,6 @@
         text-shadow: 0 0 2px rgba(255, 20, 147, 0.5);
     }
 
-    /* Hover Effect (Pink Neon Glow) */
     .game-btn:hover {
         background: rgba(255, 20, 147, 0.3);
         border-color: rgba(255, 105, 180, 1);
@@ -108,19 +99,17 @@
         width: 100%;
     }
 
-    /* Colorful Neon Block Icon Style */
     .menu-icon-block {
         width: 14px;
         height: 14px;
-        background: linear-gradient(135deg, #ff69b4, #bd00ff); /* Pink to Purple */
+        background: linear-gradient(135deg, #ff69b4, #bd00ff);
         border-radius: 3px;
-        box-shadow: 0 0 8px rgba(255, 105, 180, 0.8); /* Pink Glow */
+        box-shadow: 0 0 8px rgba(255, 105, 180, 0.8);
         z-index: 2;
         position: relative;
         border: 1px solid rgba(255,255,255,0.3);
     }
 
-    /* --- Love words Animation --- */
     #ui .love {
       position: absolute;
       top: 50%;
@@ -185,7 +174,6 @@
       100% { transform: translateY(180px); }
     }
 
-    /* Mobile Responsive Logic */
     @media screen and (max-width: 768px) {
         pre {
             font-size: 4px !important;
@@ -196,7 +184,6 @@
             font-size: 10px !important;
         }
         
-        /* Fixed Position Logic: Keep right, adjust bottom */
         .game-menu-container {
             bottom: 120px; 
             right: 20px;   
@@ -210,18 +197,14 @@
             font-size: 9px;
         }
     }
-
   </style>
 </head>
 <body>
 
-  <!-- Layer 1: Pink Meteor Canvas -->
   <canvas id="star-canvas"></canvas>
 
-  <!-- Layer 2: Love Animation -->
   <div id="ui"></div>
 
-  <!-- Layer 3: Pink Game Menu -->
   <div class="game-menu-container">
       <div class="menu-label">GAMES LIST</div>
       
@@ -232,7 +215,6 @@
   </div>
 
   <script>
-    // --- PART 1: LOVE ANIMATION LOGIC ---
     const N = 100; 
     const ui = document.getElementById('ui');
 
@@ -257,7 +239,6 @@
       ui.appendChild(love);
     }
 
-    // --- PART 2: PINK METEOR SYSTEM ---
     const canvas = document.getElementById('star-canvas');
     const ctx = canvas.getContext('2d');
     
