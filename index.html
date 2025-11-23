@@ -17,7 +17,7 @@
       padding: 0;
       overflow: hidden;
       font-family: 'Kanit', system-ui, sans-serif;
-      background-color: #05000a; /* Dark background for space */
+      background-color: #05000a; /* Dark background */
     }
 
     /* --- BACKGROUND CANVAS (Pink Meteors) --- */
@@ -35,38 +35,39 @@
     #ui {
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
-        z-index: 10; /* Layer 1: Text Animation */
+        z-index: 10;
         pointer-events: none; 
     }
 
-    /* --- GAME MENU (RIGHT SIDE) --- */
+    /* --- GAME MENU --- */
     .game-menu-container {
         position: fixed;
         right: 20px;
-        bottom: 550px;
+        bottom: 550px; /* Desktop Position */
         display: flex;
         flex-direction: column;
         gap: 12px;
-        z-index: 1000; /* Top Layer */
+        z-index: 1000;
         width: 170px;
     }
 
     .menu-label {
-        color: #ff69b4; 
+        color: #ffb6c1; /* Soft pink label */
         font-size: 10px;
         text-transform: uppercase;
         letter-spacing: 2px;
         margin-bottom: -2px;
         text-align: right;
-        opacity: 0.8;
+        opacity: 0.9;
         text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
     }
 
     .game-btn {
         position: relative;
         padding: 12px 15px;
-        background: rgba(20, 0, 10, 0.6); 
-        border: 1px solid rgba(255, 105, 180, 0.3); 
+        /* PINK GLASS STYLE */
+        background: rgba(255, 20, 147, 0.15); /* Pink tint background */
+        border: 1px solid rgba(255, 105, 180, 0.5); /* Pink border */
         backdrop-filter: blur(5px);
         color: #fff;
         text-decoration: none;
@@ -83,13 +84,14 @@
         font-family: 'Orbitron', sans-serif;
         font-size: 12px;
         z-index: 2;
+        text-shadow: 0 0 2px rgba(255, 20, 147, 0.5);
     }
 
-    /* Neon Glow Effect on Hover (Pink Theme) */
+    /* Hover Effect (Pink Neon Glow) */
     .game-btn:hover {
-        background: rgba(255, 20, 147, 0.2);
-        border-color: rgba(255, 105, 180, 0.8);
-        box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+        background: rgba(255, 20, 147, 0.3);
+        border-color: rgba(255, 105, 180, 1);
+        box-shadow: 0 0 20px rgba(255, 20, 147, 0.6);
         transform: translateX(-5px);
     }
 
@@ -97,7 +99,7 @@
         content: '';
         position: absolute;
         top: 0; left: 0; width: 0%; height: 100%;
-        background: linear-gradient(90deg, rgba(255, 20, 147, 0.3), transparent);
+        background: linear-gradient(90deg, rgba(255, 20, 147, 0.4), transparent);
         transition: width 0.3s;
         z-index: 1;
     }
@@ -110,24 +112,12 @@
     .menu-icon-block {
         width: 14px;
         height: 14px;
-        background: linear-gradient(135deg, #ff69b4, #bd00ff); 
+        background: linear-gradient(135deg, #ff69b4, #bd00ff); /* Pink to Purple */
         border-radius: 3px;
-        box-shadow: 0 0 8px rgba(255, 105, 180, 0.8);
+        box-shadow: 0 0 8px rgba(255, 105, 180, 0.8); /* Pink Glow */
         z-index: 2;
         position: relative;
         border: 1px solid rgba(255,255,255,0.3);
-    }
-
-    .game-btn.coming-soon {
-        opacity: 0.4;
-        cursor: default;
-        border-style: dashed;
-        background: transparent;
-    }
-    .game-btn.coming-soon:hover {
-        transform: none;
-        box-shadow: none;
-        border-color: rgba(255, 255, 255, 0.1);
     }
 
     /* --- Love words Animation --- */
@@ -195,7 +185,7 @@
       100% { transform: translateY(180px); }
     }
 
-    /* Mobile Responsive */
+    /* Mobile Responsive Logic */
     @media screen and (max-width: 768px) {
         pre {
             font-size: 4px !important;
@@ -205,20 +195,19 @@
         body {
             font-size: 10px !important;
         }
+        
+        /* Fixed Position Logic: Keep right, adjust bottom */
         .game-menu-container {
-            bottom: 20px; 
-            right: 50%;
-            transform: translateX(50%);
-            width: 90%;
-            flex-direction: row; 
-            justify-content: center;
+            bottom: 120px; 
+            right: 20px;   
+            width: 150px; 
+            transform: none; 
+            align-items: flex-end; 
         }
-        .game-btn {
-            flex: 1;
-            justify-content: center;
-        }
+        
         .menu-label {
-            display: none; 
+            display: block; 
+            font-size: 9px;
         }
     }
 
@@ -226,13 +215,13 @@
 </head>
 <body>
 
-  <!-- Layer 1: Background Canvas for Pink Meteors -->
+  <!-- Layer 1: Pink Meteor Canvas -->
   <canvas id="star-canvas"></canvas>
 
-  <!-- Layer 2: Original Love Animation -->
+  <!-- Layer 2: Love Animation -->
   <div id="ui"></div>
 
-  <!-- Layer 3: Game Menu -->
+  <!-- Layer 3: Pink Game Menu -->
   <div class="game-menu-container">
       <div class="menu-label">GAMES LIST</div>
       
@@ -268,7 +257,7 @@
       ui.appendChild(love);
     }
 
-    // --- PART 2: PINK METEOR BACKGROUND LOGIC ---
+    // --- PART 2: PINK METEOR SYSTEM ---
     const canvas = document.getElementById('star-canvas');
     const ctx = canvas.getContext('2d');
     
@@ -276,9 +265,8 @@
     let stars = [];
     let meteors = [];
     
-    // Config: จัดหนักให้เห็นชัดๆ
-    const STAR_COUNT = 200; // ดาวพื้นหลังเยอะขึ้น
-    const METEOR_MAX = 20;  // เพิ่มจำนวนดาวตกพร้อมกันเป็น 20 ดวง (จากเดิม 5)
+    const STAR_COUNT = 200; 
+    const METEOR_MAX = 20;
 
     function resize() {
         width = canvas.width = window.innerWidth;
@@ -312,25 +300,22 @@
     class Meteor {
         constructor() { this.reset(true); }
         reset(initial = false) {
-            // เกิดใหม่ที่ขอบบน หรือ ขอบขวา
             if (Math.random() > 0.5) {
                 this.x = Math.random() * width;
                 this.y = -100;
             } else {
                 this.x = width + 100;
-                this.y = Math.random() * (height / 1.5); // ให้เกิดได้ทั่วถึงขึ้นในแนวตั้ง
+                this.y = Math.random() * (height / 1.5); 
             }
             
-            // ปรับความเร็วและขนาดให้เห็นชัดขึ้น
-            this.speed = 10 + Math.random() * 10; // เร็วขึ้น
+            this.speed = 10 + Math.random() * 10;
             this.angle = Math.PI / 4; 
             this.vx = -this.speed * Math.cos(this.angle) * 1.5;
             this.vy = this.speed * Math.sin(this.angle);
             
-            this.length = 200 + Math.random() * 200; // หางยาวขึ้น
-            this.size = 2.5 + Math.random() * 2; // หัวใหญ่ขึ้น (2.5px - 4.5px)
+            this.length = 200 + Math.random() * 200;
+            this.size = 2.5 + Math.random() * 2;
             
-            // ถ้าเป็นการเริ่มครั้งแรก ให้กระจายทั่วจอเลยจะได้ไม่ต้องรอ
             if (initial) {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
@@ -339,34 +324,30 @@
         update() {
             this.x += this.vx;
             this.y += this.vy;
-            // รีเซ็ตเมื่อหลุดขอบจอ
             if (this.x < -this.length || this.y > height + this.length) this.reset();
         }
         draw() {
             const tailX = this.x - this.vx * (this.length / this.speed);
             const tailY = this.y - this.vy * (this.length / this.speed);
 
-            // ไล่สีหาง: ขาว -> ชมพูสด -> ม่วง -> ใส
             const gradient = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
             gradient.addColorStop(0, '#ffffff'); 
-            gradient.addColorStop(0.1, '#ff1493'); // Deep Pink ที่หัว
-            gradient.addColorStop(0.4, '#bd00ff'); // Purple กลางๆ
+            gradient.addColorStop(0.1, '#ff1493'); 
+            gradient.addColorStop(0.4, '#bd00ff'); 
             gradient.addColorStop(1, 'transparent');
 
-            // วาดหาง
             ctx.beginPath();
             ctx.moveTo(this.x, this.y);
             ctx.lineTo(tailX, tailY);
             ctx.strokeStyle = gradient;
-            ctx.lineWidth = this.size; // ใช้ความหนาที่เพิ่มขึ้น
+            ctx.lineWidth = this.size;
             ctx.lineCap = 'round';
             ctx.stroke();
 
-            // วาดหัว (Glow Effect)
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size * 1.2, 0, Math.PI*2);
             ctx.fillStyle = '#fff0f5';
-            ctx.shadowBlur = 20; // เพิ่ม Glow ให้ฟุ้ง
+            ctx.shadowBlur = 20;
             ctx.shadowColor = '#ff69b4'; 
             ctx.fill();
             ctx.shadowBlur = 0;
@@ -382,10 +363,8 @@
 
     function animateParticles() {
         ctx.clearRect(0, 0, width, height);
-        
         stars.forEach(s => { s.update(); s.draw(); });
         meteors.forEach(m => { m.update(); m.draw(); });
-
         requestAnimationFrame(animateParticles);
     }
 
