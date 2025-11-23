@@ -174,6 +174,19 @@
       79%  { transform: translateY(428.57143px); }
       100% { transform: translateY(180px); }
     }
+
+        /* โค้ดสำหรับปรับขนาดมือถือ */
+    @media screen and (max-width: 768px) {
+        pre {
+            font-size: 7px !important;
+            line-height: 8px !important;
+            left: -20% !important; /* จัดกึ่งกลางใหม่ถ้ามันเบี้ยว */
+        }
+        body {
+            font-size: 10px !important;
+        }
+    }
+
   </style>
 </head>
 <body>
@@ -231,4 +244,5 @@
 </body>
 
 </html>
+
 
