@@ -3,20 +3,40 @@
 <head>
   <meta name="google-site-verification" content="byAwgB--YyEllRLN1j1JmhSalL_NTD4upUW9TF0EpJk" />
   <meta charset="UTF-8" />
-  <title> reallovepreem</title>
+  <title>reallovepreem</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
-  <!-- Import fonts for the menu buttons to look good -->
+  
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Kanit:wght@300;400&display=swap" rel="stylesheet">
+  
   <style>
     /* --- Base page --- */
-    body {
-      background: #000;
+    body, html {
       height: 100vh;
       margin: 0;
+      padding: 0;
       overflow: hidden;
       font-family: 'Kanit', system-ui, sans-serif;
-      
+      background-color: #05000a; /* Dark background for space */
+    }
+
+    /* --- BACKGROUND CANVAS (Pink Meteors) --- */
+    #star-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0; /* Layer 0: Behind everything */
+        pointer-events: none;
+    }
+
+    /* --- LOVE ANIMATION CONTAINER --- */
+    #ui {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: 10; /* Layer 1: Text Animation */
+        pointer-events: none; 
     }
 
     /* --- GAME MENU (RIGHT SIDE) --- */
@@ -27,25 +47,26 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
-        z-index: 1000;
+        z-index: 1000; /* Top Layer */
         width: 170px;
     }
 
     .menu-label {
-        color: #696969;
+        color: #ff69b4; 
         font-size: 10px;
         text-transform: uppercase;
         letter-spacing: 2px;
         margin-bottom: -2px;
         text-align: right;
-        opacity: 0.7;
+        opacity: 0.8;
+        text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
     }
 
     .game-btn {
         position: relative;
         padding: 12px 15px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(20, 0, 10, 0.6); 
+        border: 1px solid rgba(255, 105, 180, 0.3); 
         backdrop-filter: blur(5px);
         color: #fff;
         text-decoration: none;
@@ -64,11 +85,11 @@
         z-index: 2;
     }
 
-    /* Neon Glow Effect on Hover */
+    /* Neon Glow Effect on Hover (Pink Theme) */
     .game-btn:hover {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(6, 182, 212, 0.8);
-        box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+        background: rgba(255, 20, 147, 0.2);
+        border-color: rgba(255, 105, 180, 0.8);
+        box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
         transform: translateX(-5px);
     }
 
@@ -76,7 +97,7 @@
         content: '';
         position: absolute;
         top: 0; left: 0; width: 0%; height: 100%;
-        background: linear-gradient(90deg, rgba(6,182,212,0.2), transparent);
+        background: linear-gradient(90deg, rgba(255, 20, 147, 0.3), transparent);
         transition: width 0.3s;
         z-index: 1;
     }
@@ -89,15 +110,14 @@
     .menu-icon-block {
         width: 14px;
         height: 14px;
-        background: linear-gradient(135deg, #06b6d4, #ec4899); /* Cyan to Pink */
+        background: linear-gradient(135deg, #ff69b4, #bd00ff); 
         border-radius: 3px;
-        box-shadow: 0 0 8px rgba(236, 72, 153, 0.8); /* Pink Glow */
+        box-shadow: 0 0 8px rgba(255, 105, 180, 0.8);
         z-index: 2;
         position: relative;
         border: 1px solid rgba(255,255,255,0.3);
     }
 
-    /* Placeholder for future games */
     .game-btn.coming-soon {
         opacity: 0.4;
         cursor: default;
@@ -175,15 +195,30 @@
       100% { transform: translateY(180px); }
     }
 
-        /* โค้ดสำหรับปรับขนาดมือถือ */
+    /* Mobile Responsive */
     @media screen and (max-width: 768px) {
         pre {
             font-size: 4px !important;
             line-height: 5px !important;
-            left: -10% !important; /* จัดกึ่งกลางใหม่ถ้ามันเบี้ยว */
+            left: -10% !important;
         }
         body {
             font-size: 10px !important;
+        }
+        .game-menu-container {
+            bottom: 20px; 
+            right: 50%;
+            transform: translateX(50%);
+            width: 90%;
+            flex-direction: row; 
+            justify-content: center;
+        }
+        .game-btn {
+            flex: 1;
+            justify-content: center;
+        }
+        .menu-label {
+            display: none; 
         }
     }
 
@@ -191,32 +226,24 @@
 </head>
 <body>
 
-  <!-- Animation Container -->
+  <!-- Layer 1: Background Canvas for Pink Meteors -->
+  <canvas id="star-canvas"></canvas>
+
+  <!-- Layer 2: Original Love Animation -->
   <div id="ui"></div>
 
-  <!-- Right Side Game Menu -->
+  <!-- Layer 3: Game Menu -->
   <div class="game-menu-container">
       <div class="menu-label">GAMES LIST</div>
       
-      <!-- Link to Real Blck Game -->
       <a href="real-blck.html" class="game-btn">
           <span>REAL BLCK</span>
-          <!-- Replaced SVG icon with Colorful Neon Block -->
           <div class="menu-icon-block"></div>
       </a>
-
-      <!-- Space for Future Game 1 -->
-      <!-- <a href="#" class="game-btn coming-soon">
-          <span>COMING SOON</span>
-      </a> -->
-      
-      <!-- Space for Future Game 2 -->
-      <!-- <a href="#" class="game-btn coming-soon">
-          <span>...</span>
-      </a> -->
   </div>
 
   <script>
+    // --- PART 1: LOVE ANIMATION LOGIC ---
     const N = 100; 
     const ui = document.getElementById('ui');
 
@@ -240,10 +267,133 @@
       love.appendChild(h);
       ui.appendChild(love);
     }
+
+    // --- PART 2: PINK METEOR BACKGROUND LOGIC ---
+    const canvas = document.getElementById('star-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    let width, height;
+    let stars = [];
+    let meteors = [];
+    
+    // Config: จัดหนักให้เห็นชัดๆ
+    const STAR_COUNT = 200; // ดาวพื้นหลังเยอะขึ้น
+    const METEOR_MAX = 20;  // เพิ่มจำนวนดาวตกพร้อมกันเป็น 20 ดวง (จากเดิม 5)
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+
+    class Star {
+        constructor() { this.reset(); }
+        reset() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.size = Math.random() * 2;
+            this.opacity = Math.random();
+            this.blinkSpeed = 0.005 + Math.random() * 0.01;
+            this.color = Math.random() > 0.8 ? '#ffb6c1' : '#ffffff'; 
+        }
+        update() {
+            this.opacity += this.blinkSpeed;
+            if (this.opacity > 1 || this.opacity < 0.2) this.blinkSpeed *= -1;
+        }
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = Math.abs(this.opacity);
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+            ctx.fill();
+            ctx.globalAlpha = 1.0;
+        }
+    }
+
+    class Meteor {
+        constructor() { this.reset(true); }
+        reset(initial = false) {
+            // เกิดใหม่ที่ขอบบน หรือ ขอบขวา
+            if (Math.random() > 0.5) {
+                this.x = Math.random() * width;
+                this.y = -100;
+            } else {
+                this.x = width + 100;
+                this.y = Math.random() * (height / 1.5); // ให้เกิดได้ทั่วถึงขึ้นในแนวตั้ง
+            }
+            
+            // ปรับความเร็วและขนาดให้เห็นชัดขึ้น
+            this.speed = 10 + Math.random() * 10; // เร็วขึ้น
+            this.angle = Math.PI / 4; 
+            this.vx = -this.speed * Math.cos(this.angle) * 1.5;
+            this.vy = this.speed * Math.sin(this.angle);
+            
+            this.length = 200 + Math.random() * 200; // หางยาวขึ้น
+            this.size = 2.5 + Math.random() * 2; // หัวใหญ่ขึ้น (2.5px - 4.5px)
+            
+            // ถ้าเป็นการเริ่มครั้งแรก ให้กระจายทั่วจอเลยจะได้ไม่ต้องรอ
+            if (initial) {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+            }
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            // รีเซ็ตเมื่อหลุดขอบจอ
+            if (this.x < -this.length || this.y > height + this.length) this.reset();
+        }
+        draw() {
+            const tailX = this.x - this.vx * (this.length / this.speed);
+            const tailY = this.y - this.vy * (this.length / this.speed);
+
+            // ไล่สีหาง: ขาว -> ชมพูสด -> ม่วง -> ใส
+            const gradient = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+            gradient.addColorStop(0, '#ffffff'); 
+            gradient.addColorStop(0.1, '#ff1493'); // Deep Pink ที่หัว
+            gradient.addColorStop(0.4, '#bd00ff'); // Purple กลางๆ
+            gradient.addColorStop(1, 'transparent');
+
+            // วาดหาง
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(tailX, tailY);
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = this.size; // ใช้ความหนาที่เพิ่มขึ้น
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            // วาดหัว (Glow Effect)
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 1.2, 0, Math.PI*2);
+            ctx.fillStyle = '#fff0f5';
+            ctx.shadowBlur = 20; // เพิ่ม Glow ให้ฟุ้ง
+            ctx.shadowColor = '#ff69b4'; 
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    function initParticles() {
+        stars = [];
+        meteors = [];
+        for(let i=0; i<STAR_COUNT; i++) stars.push(new Star());
+        for(let i=0; i<METEOR_MAX; i++) meteors.push(new Meteor());
+    }
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, width, height);
+        
+        stars.forEach(s => { s.update(); s.draw(); });
+        meteors.forEach(m => { m.update(); m.draw(); });
+
+        requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('resize', () => { resize(); initParticles(); });
+    resize();
+    initParticles();
+    animateParticles();
+
   </script>
 </body>
-
 </html>
-
-
-
