@@ -3,31 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Real Blck</title>
+    <title>Real Block</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --grid-color: #1e293b;
-            --accent-cyan: #06b6d4;
-            --accent-pink: #ec4899;
-            --accent-yellow: #eab308;
-            --accent-green: #22c55e;
+            --bg-color: #022c22;
+            --grid-color: #064e3b;
+            --accent-snow: #e0f2fe;
+            --accent-red: #ef4444;
+            --accent-gold: #f59e0b;
+            --accent-tree: #22c55e;
         }
 
         body {
             font-family: 'Kanit', sans-serif;
             background-color: var(--bg-color);
-            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
-            color: white;
+            background-image: radial-gradient(circle at 50% 0%, #065f46 0%, #022c22 80%);
+            color: #f0f9ff;
             overflow: hidden;
             touch-action: none;
         }
 
-        .brand-font {
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 2px;
+        .snowflake {
+            position: absolute;
+            color: #fff;
+            font-size: 1em;
+            font-family: Arial;
+            text-shadow: 0 0 1px #000;
+            top: -10%;
+            z-index: 0;
+            user-select: none;
+            cursor: default;
+            animation-name: snowflakes-fall, snowflakes-shake;
+            animation-duration: 10s, 3s;
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite, infinite;
+            animation-play-state: running, running;
+            opacity: 0.3;
+        }
+        @keyframes snowflakes-fall {
+            0% { top: -10%; }
+            100% { top: 100%; }
+        }
+        @keyframes snowflakes-shake {
+            0% { transform: translateX(0px); }
+            50% { transform: translateX(80px); }
+            100% { transform: translateX(0px); }
+        }
+        .snowflake:nth-of-type(0) { left: 1%; animation-delay: 0s, 0s; }
+        .snowflake:nth-of-type(1) { left: 10%; animation-delay: 1s, 1s; }
+        .snowflake:nth-of-type(2) { left: 20%; animation-delay: 6s, .5s; }
+        .snowflake:nth-of-type(3) { left: 30%; animation-delay: 4s, 2s; }
+        .snowflake:nth-of-type(4) { left: 40%; animation-delay: 2s, 2s; }
+        .snowflake:nth-of-type(5) { left: 50%; animation-delay: 8s, 3s; }
+        .snowflake:nth-of-type(6) { left: 60%; animation-delay: 6s, 2s; }
+        .snowflake:nth-of-type(7) { left: 70%; animation-delay: 2.5s, 1s; }
+        .snowflake:nth-of-type(8) { left: 80%; animation-delay: 1s, 0s; }
+        .snowflake:nth-of-type(9) { left: 90%; animation-delay: 3s, 1.5s; }
+
+
+        .xmas-font {
+            font-family: 'Mountains of Christmas', cursive;
+            letter-spacing: 1px;
+            font-weight: 700;
         }
 
         .back-button {
@@ -37,21 +76,23 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #94a3b8;
+            color: #cbd5e1;
             text-decoration: none;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 16px;
             padding: 8px 16px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
             border-radius: 20px;
             backdrop-filter: blur(4px);
             transition: all 0.2s;
             z-index: 50;
         }
         .back-button:hover {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.25);
             color: white;
-            transform: translateX(-2px);
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
         .game-board {
@@ -59,32 +100,36 @@
             grid-template-columns: repeat(8, 1fr);
             grid-template-rows: repeat(8, 1fr);
             gap: 4px;
-            padding: 4px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 6px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 0 25px rgba(220, 20, 60, 0.2);
             aspect-ratio: 1;
             width: 100%;
             max-width: 400px;
             margin: 0 auto;
             position: relative;
+            z-index: 10;
         }
 
         .cell {
             background: var(--grid-color);
-            border-radius: 4px;
+            border-radius: 6px;
             transition: background-color 0.1s;
+            position: relative;
         }
 
-        .c-cyan { background-color: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan); }
-        .c-pink { background-color: var(--accent-pink); box-shadow: 0 0 10px var(--accent-pink); }
-        .c-yellow { background-color: var(--accent-yellow); box-shadow: 0 0 10px var(--accent-yellow); }
-        .c-green { background-color: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
+        .c-cyan { background-color: var(--accent-snow); box-shadow: 0 0 8px var(--accent-snow); }
+        .c-pink { background-color: var(--accent-red); box-shadow: 0 0 8px var(--accent-red); }
+        .c-yellow { background-color: var(--accent-gold); box-shadow: 0 0 8px var(--accent-gold); }
+        .c-green { background-color: var(--accent-tree); box-shadow: 0 0 8px var(--accent-tree); }
         
         .cell.preview {
-            opacity: 0.4;
-            transform: scale(0.95);
-            box-shadow: inset 0 0 5px rgba(255,255,255,0.5);
+            opacity: 0.5;
+            transform: scale(0.9);
+            box-shadow: none;
+            filter: brightness(1.2);
         }
 
         .shape-dock {
@@ -92,9 +137,13 @@
             justify-content: space-around;
             align-items: center;
             min-height: 130px;
-            margin-top: 10px;
+            margin-top: 15px;
             padding: 10px;
             width: 100%;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            z-index: 10;
         }
 
         .draggable-shape {
@@ -118,7 +167,8 @@
         .mini-cell {
             width: 22px;
             height: 22px;
-            border-radius: 3px;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.1);
         }
 
         #drag-proxy {
@@ -126,15 +176,15 @@
             pointer-events: none;
             z-index: 100;
             display: none;
-            opacity: 0.9;
+            opacity: 0.95;
             transform-origin: center center;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
         }
 
         #drag-proxy .mini-cell {
             width: 40px;
             height: 40px;
             gap: 4px;
-            box-shadow: 0 0 15px rgba(255,255,255,0.2);
         }
         
         #drag-proxy .mini-grid {
@@ -142,43 +192,58 @@
         }
 
         @keyframes pop { 0% { transform: scale(0); } 70% { transform: scale(1.1); } 100% { transform: scale(1); } }
-        @keyframes clear-flash { 0% { filter: brightness(1); transform: scale(1); } 50% { filter: brightness(2); transform: scale(1.1); } 100% { opacity: 0; transform: scale(0); } }
+        @keyframes sparkle { 0% { filter: brightness(1); } 50% { filter: brightness(1.5); } 100% { filter: brightness(1); } }
+        @keyframes clear-flash { 0% { transform: scale(1); background-color: #fff; } 100% { opacity: 0; transform: scale(1.2); } }
 
-        .animate-pop { animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .animate-clear { animation: clear-flash 0.3s forwards; z-index: 10; }
+        .animate-pop { animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .animate-clear { animation: clear-flash 0.4s forwards; z-index: 20; }
 
         .glass-panel {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(180, 20, 20, 0.2);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .ghost-active { opacity: 0.1; }
+        .ghost-active { opacity: 0.2; }
+
+        .decor-icon {
+            font-size: 24px;
+            filter: drop-shadow(0 0 5px rgba(255,215,0,0.5));
+        }
     </style>
 </head>
 <body class="h-screen w-full flex flex-col items-center justify-center p-4 select-none">
 
-    <a href="index.html" class="back-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-        </svg>
-        BACK
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❅</div>
+
+    <a href="index.html" class="back-button xmas-font">
+        <span style="font-size: 20px;">🎄</span> MENU
     </a>
 
-    <div class="w-full max-w-md flex justify-between items-end mb-4 mt-8">
+    <div class="w-full max-w-md flex justify-between items-end mb-4 mt-8 z-10">
         <div>
-            <h1 class="text-3xl brand-font text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500" style="text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);">REAL BLCK</h1>
+            <h1 class="text-5xl xmas-font text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-yellow-200 to-green-400" style="text-shadow: 0 2px 10px rgba(239, 68, 68, 0.5);">REAL BLOCK</h1>
         </div>
         <div class="text-right">
-            <div class="text-xs text-slate-400">BEST</div>
-            <div id="high-score" class="text-xl font-bold text-yellow-400 font-mono">0</div>
+            <div class="text-xs text-yellow-200 xmas-font tracking-widest">BEST GIFT</div>
+            <div id="high-score" class="text-2xl font-bold text-yellow-400 xmas-font">0</div>
         </div>
     </div>
 
-    <div class="glass-panel w-full max-w-md py-3 px-6 mb-4 flex justify-between items-center">
-        <span class="text-slate-300 text-sm">SCORE</span>
-        <span id="current-score" class="text-4xl font-bold text-white font-mono">0</span>
+    <div class="glass-panel w-full max-w-md py-3 px-6 mb-4 flex justify-between items-center z-10">
+        <span class="text-red-200 text-lg xmas-font">SCORE</span>
+        <span id="current-score" class="text-4xl font-bold text-white xmas-font" style="text-shadow: 0 0 10px rgba(255,255,255,0.5);">0</span>
     </div>
 
     <div class="relative w-full max-w-md flex flex-col items-center">
@@ -191,12 +256,14 @@
 
     <div id="drag-proxy"></div>
 
-    <div id="game-over-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
-        <div class="text-center p-8" id="modal-content">
-            <h2 class="text-5xl brand-font text-pink-500 mb-4 drop-shadow-glow tracking-widest">GAME OVER</h2>
-            <div class="text-2xl text-white font-mono mb-8" id="final-score">0</div>
-            <button onclick="game.restart()" class="px-10 py-4 bg-white text-black font-bold text-xl rounded-full hover:scale-105 transition-transform brand-font">
-                RETRY
+    <div id="game-over-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <div class="text-center p-8 bg-[#0f2e1f] border-2 border-red-500 rounded-3xl shadow-[0_0_50px_rgba(239,68,68,0.4)]" id="modal-content">
+            <div class="text-6xl mb-2">🎅</div>
+            <h2 class="text-5xl xmas-font text-red-400 mb-2">OH NO!</h2>
+            <p class="text-green-300 xmas-font text-xl mb-6">The bag is full!</p>
+            <div class="text-4xl text-white xmas-font mb-8 drop-shadow-md" id="final-score">0</div>
+            <button onclick="game.restart()" class="px-10 py-3 bg-gradient-to-r from-red-600 to-red-500 text-white font-bold text-2xl rounded-full hover:scale-105 hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all xmas-font border border-red-400">
+                TRY AGAIN 🎁
             </button>
             <br><br>
             <a href="index.html" class="text-slate-400 hover:text-white underline text-sm mt-4">Return to Menu</a>
@@ -205,37 +272,40 @@
 
     <script>
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
         function playSound(type) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
             const now = audioCtx.currentTime;
 
+            const createBell = (freq, duration, volume) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine'; 
+                osc.frequency.setValueAtTime(freq, now);
+                
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(volume, now + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start(now);
+                osc.stop(now + duration);
+            };
+
             if (type === 'pick') {
-                osc.frequency.setValueAtTime(200, now);
-                osc.frequency.exponentialRampToValueAtTime(400, now + 0.1);
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.1);
-                osc.start(now);
-                osc.stop(now + 0.1);
+                createBell(880, 0.5, 0.1); 
+                createBell(1760, 0.3, 0.05);
             } else if (type === 'place') {
-                osc.type = 'square';
-                osc.frequency.setValueAtTime(100, now);
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-                osc.start(now);
-                osc.stop(now + 0.1);
+                createBell(523.25, 1.0, 0.15);
+                createBell(1046.50, 0.8, 0.05);
             } else if (type === 'clear') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(300, now);
-                osc.frequency.linearRampToValueAtTime(600, now + 0.1);
-                osc.frequency.linearRampToValueAtTime(900, now + 0.2);
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.3);
-                osc.start(now);
-                osc.stop(now + 0.3);
+                createBell(523.25, 1.5, 0.1);
+                setTimeout(() => createBell(659.25, 1.5, 0.1), 100);
+                setTimeout(() => createBell(783.99, 1.5, 0.1), 200);
+                setTimeout(() => createBell(1046.50, 2.0, 0.1), 300);
             }
         }
 
@@ -253,7 +323,7 @@
             constructor() {
                 this.grid = Array(BOARD_SIZE).fill().map(() => Array(BOARD_SIZE).fill(null));
                 this.score = 0;
-                this.highScore = localStorage.getItem('realblck_highscore') || 0;
+                this.highScore = localStorage.getItem('xmasblck_highscore') || 0;
                 this.shapesInDock = [];
                 this.dom = {
                     board: document.getElementById('game-board'),
@@ -346,7 +416,7 @@
                 
                 let proxyHtml = `<div class="mini-grid" style="grid-template-columns: repeat(${cols}, ${this.boardState.simpleCellSize}px); gap: 4px;">`;
                 shapeData.matrix.flat().forEach(v => {
-                    proxyHtml += `<div style="height:${this.boardState.simpleCellSize-4}px; border-radius:4px;" class="${v ? 'cell filled '+shapeData.color : 'opacity-0'}"></div>`;
+                    proxyHtml += `<div style="height:${this.boardState.simpleCellSize-4}px; border-radius:6px;" class="${v ? 'cell filled '+shapeData.color : 'opacity-0'}"></div>`;
                 });
                 proxyHtml += `</div>`;
 
@@ -531,7 +601,7 @@
                 if (this.score > this.highScore) {
                     this.highScore = this.score;
                     this.dom.highScore.innerText = this.highScore;
-                    localStorage.setItem('realblck_highscore', this.highScore);
+                    localStorage.setItem('xmasblck_highscore', this.highScore);
                 }
             }
 
