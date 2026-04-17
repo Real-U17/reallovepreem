@@ -7,165 +7,142 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Kanit:wght@300;400&display=swap" rel="stylesheet">
   <style>
-    body, html {
-      height: 100vh;
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    body, html {
+      height: 100vh;
       overflow: hidden;
       font-family: 'Kanit', system-ui, sans-serif;
-      background: linear-gradient(180deg, #0ea5e9 0%, #38bdf8 35%, #67e8f9 70%, #bae6fd 100%);
+      background-color: #87ceeb;
     }
 
-    .landscape {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
+    .scene {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, #aee2ff 0%, #6bb9f0 50%, #f4d03f 50%, #f9e79f 100%);
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
     }
 
-    /* Sun */
-    .sun {
-        position: absolute;
-        top: 45px;
-        right: 10%;
-        width: 92px;
-        height: 92px;
-        background: #fde68a;
-        border-radius: 50%;
-        box-shadow: 0 0 40px #fde68a, 0 0 90px rgba(255, 255, 255, 0.45);
-        z-index: 0;
+    .wave {
+      position: absolute;
+      top: 45%;
+      left: 0;
+      width: 200%;
+      height: 10%;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 100%;
+      animation: wave-move 4s infinite alternate ease-in-out;
     }
 
-    .hill-bg {
-        position: absolute;
-        bottom: 0;
-        left: -10%;
-        width: 120%;
-        height: 30%;
-        background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
-        border-radius: 50% 50% 0 0 / 30% 100% 0 0;
-        opacity: 0.8;
-        z-index: 1;
+    .wave:nth-child(2) {
+      top: 47%;
+      background: rgba(255, 255, 255, 0.2);
+      animation-delay: -2s;
     }
 
-    .hill-fg {
-        position: absolute;
-        bottom: -35px;
-        right: -10%;
-        width: 120%;
-        height: 23%;
-        background: linear-gradient(180deg, #38bdf8 0%, #0ea5e9 100%);
-        border-radius: 50% 50% 0 0 / 20% 100% 0 0;
-        box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
-        z-index: 3;
+    @keyframes wave-move {
+      0% { transform: translateX(0) scaleY(1); }
+      100% { transform: translateX(-10%) scaleY(1.2); }
     }
 
-    /* Objects Container */
-    .scene-objects {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 6; /* Keep Songkran props above foreground hill */
+    .songkran-title {
+      position: absolute;
+      top: 10%;
+      width: 100%;
+      text-align: center;
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 3px 3px 0 #ff6b81, -2px -2px 0 #4facfe;
+      z-index: 3;
+      animation: bounce-text 2s infinite ease-in-out;
+      letter-spacing: 2px;
     }
 
-    /* Festival flag */
-    .flag {
-        position: absolute;
-        width: 6px;
-        height: 90px;
-        background: #f8fafc;
-        border-radius: 99px;
-        filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.25));
-    }
-    .flag::after {
-        content: '';
-        position: absolute;
-        top: 8px;
-        left: 6px;
-        width: 28px;
-        height: 18px;
-        background: linear-gradient(90deg, #f97316, #f43f5e);
-        clip-path: polygon(0 0, 100% 18%, 0 100%);
-        border-radius: 0 4px 4px 0;
+    @keyframes bounce-text {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
     }
 
-    .songkran-kids {
-        position: absolute;
-        left: 50%;
-        bottom: 8%;
-        width: 560px;
-        height: 220px;
-        transform: translateX(-50%);
-        z-index: 8;
-        animation: kidsFloat 2.2s ease-in-out infinite;
-    }
-    .songkran-illustration {
-        width: 100%;
-        height: 100%;
-        display: block;
-        filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.2));
+    .characters {
+      position: absolute;
+      bottom: 8%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 150px;
+      z-index: 5;
     }
 
-    .splash {
-        position: absolute;
-        top: 96px;
-        left: 50%;
-        width: 240px;
-        height: 26px;
-        transform: translateX(-50%);
-        pointer-events: none;
-    }
-    .splash::before,
-    .splash::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        width: 46%;
-        height: 100%;
-        border-top: 4px solid rgba(125, 211, 252, 0.95);
-        border-radius: 50%;
-        filter: drop-shadow(0 0 6px rgba(186, 230, 253, 0.8));
-        animation: waterSpray 900ms infinite ease-in-out alternate;
-    }
-    .splash::before {
-        left: 0;
-        transform: rotate(6deg);
-    }
-    .splash::after {
-        right: 0;
-        transform: rotate(-6deg) scaleX(-1);
-        animation-delay: -450ms;
+    .character-wrapper {
+      position: relative;
+      width: 300px;
+      height: 350px;
+      animation: float 3s infinite ease-in-out;
     }
 
-    @keyframes waterSpray {
-        from {
-            opacity: 0.5;
-            border-top-width: 2px;
-            transform: translateY(2px) scaleX(0.96);
-        }
-        to {
-            opacity: 1;
-            border-top-width: 5px;
-            transform: translateY(-2px) scaleX(1.04);
-        }
-    }
-    @keyframes kidsFloat {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-6px); }
+    .char-right { animation-delay: -1.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
     }
 
-    #water-canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 5;
-        pointer-events: none;
+    .water-stream {
+      position: absolute;
+      height: 15px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.8);
+      opacity: 0.8;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .stream-left {
+      top: 180px;
+      left: 220px;
+      width: 0;
+      animation: shoot-left 2s infinite ease-out;
+      transform-origin: left center;
+    }
+
+    @keyframes shoot-left {
+      0% { width: 0; opacity: 1; transform: translateX(0); }
+      40% { width: 350px; opacity: 0.8; transform: translateX(0) rotate(-5deg); }
+      80% { width: 100px; opacity: 0; transform: translateX(250px) rotate(-5deg); }
+      100% { width: 0; opacity: 0; }
+    }
+
+    .stream-right {
+      top: 200px;
+      right: 220px;
+      width: 0;
+      background: linear-gradient(-90deg, #43e97b 0%, #38f9d7 100%);
+      box-shadow: 0 0 10px rgba(56, 249, 215, 0.8);
+      animation: shoot-right 2s infinite ease-out;
+      animation-delay: -1s;
+      transform-origin: right center;
+    }
+
+    @keyframes shoot-right {
+      0% { width: 0; opacity: 1; transform: translateX(0); }
+      40% { width: 350px; opacity: 0.8; transform: translateX(0) rotate(5deg); }
+      80% { width: 100px; opacity: 0; transform: translateX(-250px) rotate(5deg); }
+      100% { width: 0; opacity: 0; }
+    }
+
+    .particle {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
     #ui {
@@ -317,15 +294,30 @@
     }
 
     @media screen and (max-width: 768px) {
-        pre {
-            font-size: 4px !important;
-            line-height: 5px !important;
-            left: -10% !important;
+        .characters {
+            gap: 20px;
+            transform: scale(0.7);
+            bottom: 5%;
         }
-        body {
-            font-size: 10px !important;
+        .songkran-title {
+            font-size: 2rem;
         }
-        
+        .stream-left { animation: shoot-left-mobile 2s infinite ease-out; }
+        .stream-right { animation: shoot-right-mobile 2s infinite ease-out; }
+
+        @keyframes shoot-left-mobile {
+            0% { width: 0; opacity: 1; }
+            40% { width: 150px; opacity: 0.8; }
+            80% { width: 50px; opacity: 0; transform: translateX(100px); }
+            100% { width: 0; opacity: 0; }
+        }
+        @keyframes shoot-right-mobile {
+            0% { width: 0; opacity: 1; }
+            40% { width: 150px; opacity: 0.8; }
+            80% { width: 50px; opacity: 0; transform: translateX(-100px); }
+            100% { width: 0; opacity: 0; }
+        }
+
         .game-menu-container {
             bottom: 120px; 
             right: 20px;   
@@ -343,78 +335,96 @@
 </head>
 <body>
 
-  <div class="landscape">
-      <!-- Sun in Sky -->
-      <div class="sun"></div>
+  <div class="scene" id="scene">
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <h1 class="songkran-title">💦 สุขสันต์วันสงกรานต์ 💦</h1>
 
-      <!-- Background Hill -->
-      <div class="hill-bg"></div>
-      
-      <!-- Festival flags -->
-      <div class="flag" style="left: 10%; bottom: 24%; z-index: 2;"></div>
-      <div class="flag" style="left: 85%; bottom: 22%; z-index: 2; transform: scale(0.9);"></div>
+      <div class="characters">
+          <div class="character-wrapper char-left">
+              <svg viewBox="0 0 300 400" width="100%" height="100%">
+                  <rect x="110" y="320" width="30" height="50" rx="15" fill="#111"/>
+                  <rect x="160" y="320" width="30" height="50" rx="15" fill="#111"/>
+                  <path d="M 80,220 Q 150,200 220,220 L 240,320 Q 150,340 60,320 Z" fill="#e0f7fa"/>
+                  <circle cx="100" cy="250" r="10" fill="#ff8da1"/>
+                  <circle cx="130" cy="290" r="12" fill="#ff8da1"/>
+                  <circle cx="180" cy="260" r="9" fill="#ff8da1"/>
+                  <circle cx="210" cy="300" r="11" fill="#ff8da1"/>
+                  <rect x="135" y="220" width="30" height="100" fill="#111"/>
+                  <path d="M 180,240 Q 230,260 250,230" stroke="#e0f7fa" stroke-width="30" stroke-linecap="round" fill="none"/>
+                  <circle cx="250" cy="230" r="15" fill="#ffe0e5"/>
+                  <g fill="#ffb6c1">
+                      <circle cx="150" cy="150" r="80" />
+                      <circle cx="80" cy="150" r="40" />
+                      <circle cx="220" cy="150" r="40" />
+                      <circle cx="100" cy="90" r="45" />
+                      <circle cx="200" cy="90" r="45" />
+                      <circle cx="150" cy="60" r="45" />
+                      <circle cx="70" cy="200" r="35" />
+                      <circle cx="230" cy="200" r="35" />
+                  </g>
+                  <ellipse cx="150" cy="160" rx="65" ry="55" fill="#fff0f5"/>
+                  <path d="M 110,150 Q 125,140 140,155" stroke="#111" stroke-width="6" fill="none" stroke-linecap="round"/>
+                  <circle cx="125" cy="160" r="8" fill="#111"/>
+                  <path d="M 160,155 Q 175,140 190,150" stroke="#111" stroke-width="6" fill="none" stroke-linecap="round"/>
+                  <path d="M 165,160 L 185,160" stroke="#111" stroke-width="6" fill="none" stroke-linecap="round"/>
+                  <path d="M 140,185 Q 150,190 160,185" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
+                  <ellipse cx="105" cy="175" rx="10" ry="6" fill="#ff99a8" opacity="0.6"/>
+                  <ellipse cx="195" cy="175" rx="10" ry="6" fill="#ff99a8" opacity="0.6"/>
+                  <g transform="translate(190, 200)">
+                      <rect x="0" y="20" width="80" height="25" rx="5" fill="#222"/>
+                      <rect x="20" y="45" width="20" height="30" rx="5" fill="#222"/>
+                      <ellipse cx="15" cy="15" rx="20" ry="15" fill="#ff6b81"/>
+                      <circle cx="85" cy="32" r="5" fill="#00f2fe"/>
+                  </g>
+                  <path d="M 170,280 Q 190,320 210,280 Z" fill="#ffb6c1"/>
+                  <text x="180" y="295" font-size="12" font-weight="bold" fill="#111" transform="rotate(-15, 180, 295)">NANI</text>
+              </svg>
+              <div class="water-stream stream-left"></div>
+          </div>
 
-      <!-- Objects Container (Mixed depth) -->
-      <div class="scene-objects">
-        <div class="songkran-kids">
-          <svg class="songkran-illustration" viewBox="0 0 560 220" aria-hidden="true">
-            <g transform="translate(20,18)">
-              <path d="M70 102 C35 136, 32 163, 6 176 C44 180, 86 164, 109 136 Z" fill="#fde047"/>
-              <ellipse cx="92" cy="60" rx="36" ry="34" fill="#ffd8b5"/>
-              <circle cx="112" cy="30" r="18" fill="#0f172a"/>
-              <path d="M64 36 Q92 6 122 36 L122 48 L64 48 Z" fill="#111827"/>
-              <circle cx="104" cy="28" r="5" fill="#ef4444"/>
-              <circle cx="112" cy="33" r="5" fill="#facc15"/>
-              <ellipse cx="102" cy="70" rx="24" ry="10" fill="#f87171"/>
-              <rect x="60" y="92" width="74" height="48" rx="16" fill="#facc15"/>
-              <rect x="69" y="138" width="26" height="48" rx="12" fill="#3730a3"/>
-              <rect x="98" y="138" width="28" height="48" rx="12" fill="#4338ca"/>
-              <rect x="78" y="182" width="18" height="8" rx="4" fill="#ffd8b5"/>
-              <rect x="106" y="182" width="18" height="8" rx="4" fill="#ffd8b5"/>
-              <rect x="126" y="104" width="34" height="14" rx="7" fill="#ffd8b5"/>
-              <rect x="146" y="102" width="62" height="25" rx="12" fill="#ec4899"/>
-              <rect x="175" y="97" width="28" height="18" rx="9" fill="#facc15"/>
-              <rect x="198" y="106" width="22" height="8" rx="4" fill="#60a5fa"/>
-              <circle cx="175" cy="114" r="7" fill="#fde047"/>
-            </g>
-
-            <g transform="translate(304,22)">
-              <ellipse cx="84" cy="58" rx="36" ry="34" fill="#ffd8b5"/>
-              <path d="M50 34 Q88 0 118 30 Q116 48 84 50 Q56 50 50 34 Z" fill="#111827"/>
-              <ellipse cx="94" cy="68" rx="24" ry="10" fill="#f87171"/>
-              <rect x="52" y="88" width="76" height="50" rx="16" fill="#f43f5e"/>
-              <circle cx="62" cy="98" r="2" fill="#fff"/>
-              <circle cx="70" cy="112" r="2" fill="#fff"/>
-              <circle cx="84" cy="100" r="2" fill="#fff"/>
-              <circle cx="98" cy="110" r="2" fill="#fff"/>
-              <circle cx="112" cy="98" r="2" fill="#fff"/>
-              <rect x="62" y="136" width="28" height="50" rx="12" fill="#3f3f46"/>
-              <rect x="94" y="136" width="29" height="50" rx="12" fill="#52525b"/>
-              <rect x="64" y="182" width="20" height="8" rx="4" fill="#ffd8b5"/>
-              <rect x="98" y="182" width="20" height="8" rx="4" fill="#ffd8b5"/>
-              <rect x="22" y="102" width="34" height="14" rx="7" fill="#ffd8b5"/>
-              <rect x="-10" y="100" width="62" height="25" rx="12" fill="#4338ca"/>
-              <rect x="-8" y="105" width="28" height="15" rx="7" fill="#facc15"/>
-              <rect x="-20" y="108" width="12" height="8" rx="4" fill="#60a5fa"/>
-              <circle cx="18" cy="112" r="7" fill="#fde047"/>
-            </g>
-
-            <path d="M226 120 Q262 102 280 118 Q296 134 334 118" fill="none" stroke="#7dd3fc" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
-            <circle cx="270" cy="116" r="4" fill="#bae6fd"/>
-            <circle cx="286" cy="122" r="3.5" fill="#bae6fd"/>
-            <circle cx="302" cy="116" r="4" fill="#bae6fd"/>
-          </svg>
-          <div class="splash"></div>
-        </div>
-        
-        <div class="flag" style="right: 15%; bottom: 8%; z-index: 2; height: 110px;"></div>
+          <div class="character-wrapper char-right">
+              <svg viewBox="0 0 300 400" width="100%" height="100%">
+                  <rect x="120" y="320" width="35" height="40" rx="15" fill="#c0392b"/>
+                  <rect x="170" y="320" width="35" height="40" rx="15" fill="#c0392b"/>
+                  <path d="M 90,230 Q 160,210 230,230 L 250,330 Q 160,350 70,330 Z" fill="#b3e5fc"/>
+                  <path d="M 100,260 L 110,250 L 120,260 L 110,270 Z" fill="#ffd54f"/>
+                  <path d="M 190,290 L 200,280 L 210,290 L 200,300 Z" fill="#ff8da1"/>
+                  <circle cx="150" cy="300" r="8" fill="#fff"/>
+                  <path d="M 160,240 Q 100,260 80,230" stroke="#b3e5fc" stroke-width="30" stroke-linecap="round" fill="none"/>
+                  <circle cx="80" cy="230" r="15" fill="#ffe0e5"/>
+                  <path d="M 60,160 C 60,50 260,50 260,160 C 260,240 60,240 60,160 Z" fill="#ffffff"/>
+                  <path d="M 110,120 Q 150,100 210,140 Q 160,80 110,120 Z" fill="#2e7d32"/>
+                  <path d="M 180,120 Q 210,100 240,150 Q 220,100 180,120 Z" fill="#1b5e20"/>
+                  <g transform="translate(130, 80) scale(0.8)">
+                      <circle cx="0" cy="0" r="30" fill="#eee"/>
+                      <path d="M 0,0 L 30,0 A 30 30 0 0 0 0,-30 Z" fill="#e74c3c"/>
+                      <path d="M 0,0 L 0,-30 A 30 30 0 0 0 -30,0 Z" fill="#f1c40f"/>
+                      <path d="M 0,0 L -30,0 A 30 30 0 0 0 0,30 Z" fill="#3498db"/>
+                      <path d="M 0,0 L 0,30 A 30 30 0 0 0 30,0 Z" fill="#2ecc71"/>
+                      <circle cx="0" cy="0" r="5" fill="#fff"/>
+                  </g>
+                  <ellipse cx="180" cy="170" rx="50" ry="45" fill="#fff0f5"/>
+                  <path d="M 145,160 Q 155,150 165,160" stroke="#111" stroke-width="5" fill="none" stroke-linecap="round"/>
+                  <path d="M 190,155 Q 210,145 210,170 Q 190,170 190,155 Z" fill="#111"/>
+                  <circle cx="205" cy="160" r="4" fill="#fff"/>
+                  <path d="M 165,185 Q 175,195 185,180" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>
+                  <ellipse cx="140" cy="175" rx="8" ry="5" fill="#ff99a8" opacity="0.6"/>
+                  <ellipse cx="220" cy="175" rx="8" ry="5" fill="#ff99a8" opacity="0.6"/>
+                  <g transform="translate(-10, 200)">
+                      <rect x="30" y="20" width="90" height="25" rx="5" fill="#4caf50"/>
+                      <rect x="80" y="45" width="20" height="30" rx="5" fill="#388e3c"/>
+                      <circle cx="75" cy="15" r="18" fill="#fff"/>
+                      <path d="M 57,15 A 18 18 0 0 1 93,15" fill="#ffca28"/>
+                      <path d="M 57,15 A 18 18 0 0 0 93,15" fill="#ef5350"/>
+                      <circle cx="75" cy="15" r="5" fill="#42a5f5"/>
+                      <circle cx="25" cy="32" r="5" fill="#38f9d7"/>
+                  </g>
+              </svg>
+              <div class="water-stream stream-right"></div>
+          </div>
       </div>
-
-      <!-- Foreground Hill -->
-      <div class="hill-fg"></div>
   </div>
-
-  <canvas id="water-canvas"></canvas>
 
   <div id="ui"></div>
 
@@ -452,87 +462,50 @@
       ui.appendChild(love);
     }
 
-    const canvas = document.getElementById('water-canvas');
-    const ctx = canvas.getContext('2d');
-    
-    let width, height;
-    let droplets = [];
-    
-    const WATER_COUNT = 360; 
+    function createSplash(scene, x, y, direction) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
 
-    function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
+      const size = Math.random() * 8 + 4;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+
+      const colors = ['#00f2fe', '#4facfe', '#ffffff', '#38f9d7'];
+      particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+      scene.appendChild(particle);
+
+      const angle = (Math.random() * 45 - 22.5) * (Math.PI / 180);
+      const velocity = Math.random() * 50 + 50;
+      const dirMultiplier = direction === 'right' ? 1 : -1;
+      const endX = x + (Math.cos(angle) * velocity * 3 * dirMultiplier);
+      const endY = y + (Math.sin(angle) * velocity * 3) + 100;
+
+      particle.animate([
+        { transform: 'translate(0, 0) scale(1)', opacity: 0.8 },
+        { transform: `translate(${endX - x}px, ${endY - y}px) scale(0)`, opacity: 0 }
+      ], {
+        duration: Math.random() * 500 + 500,
+        easing: 'cubic-bezier(.25,.8,.25,1)'
+      }).onfinish = () => particle.remove();
     }
 
-    class WaterDrop {
-        constructor() {
-            this.reset(true);
-        }
+    const scene = document.getElementById('scene');
 
-        reset(initial = false) {
-            this.x = Math.random() * width;
-            this.y = initial ? Math.random() * height : -10;
-            
-            this.size = Math.random() * 3 + 1.5;
-            
-            this.speed = this.size * 0.8 + 1.2;
-            
-            this.swayOffset = Math.random() * Math.PI * 2;
-            this.swayAmplitude = Math.random() * 0.8 + 0.4;
+    setInterval(() => {
+      const isMobile = window.innerWidth <= 768;
+      const centerX = window.innerWidth / 2;
+      const leftGunX = isMobile ? centerX - 60 : centerX - 120;
+      const leftGunY = window.innerHeight * 0.7;
+      const rightGunX = isMobile ? centerX + 60 : centerX + 120;
+      const rightGunY = window.innerHeight * 0.72;
 
-            this.opacity = Math.random() * 0.35 + 0.45;
-        }
-
-        update() {
-            this.y += this.speed;
-            this.x += Math.sin(this.y * 0.012 + this.swayOffset) * this.swayAmplitude;
-
-            if (this.y > height) {
-                this.reset();
-            }
-            if (this.x > width) {
-                this.x = 0;
-            } else if (this.x < 0) {
-                this.x = width;
-            }
-        }
-
-        draw() {
-            const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 2);
-            gradient.addColorStop(0, `rgba(186, 230, 253, ${this.opacity + 0.2})`);
-            gradient.addColorStop(1, `rgba(14, 165, 233, ${this.opacity})`);
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    function initWater() {
-        droplets = [];
-        for(let i=0; i<WATER_COUNT; i++) {
-            droplets.push(new WaterDrop());
-        }
-    }
-
-    function animateWater() {
-        ctx.clearRect(0, 0, width, height);
-        droplets.forEach(drop => {
-            drop.update();
-            drop.draw();
-        });
-        requestAnimationFrame(animateWater);
-    }
-
-    window.addEventListener('resize', () => {
-        resize();
-        initWater(); 
-    });
-
-    resize();
-    initWater();
-    animateWater();
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => createSplash(scene, leftGunX, leftGunY, 'right'), Math.random() * 200);
+        setTimeout(() => createSplash(scene, rightGunX, rightGunY, 'left'), Math.random() * 200 + 1000);
+      }
+    }, 300);
   </script>
 </body>
 </html>
