@@ -96,136 +96,26 @@
     .songkran-kids {
         position: absolute;
         left: 50%;
-        bottom: 10%;
-        width: 520px;
-        height: 180px;
+        bottom: 8%;
+        width: 560px;
+        height: 220px;
         transform: translateX(-50%);
         z-index: 8;
+        animation: kidsFloat 2.2s ease-in-out infinite;
     }
-    .kid {
-        position: absolute;
-        width: 130px;
-        height: 170px;
-        bottom: 0;
-        animation: kidBounce 1.8s ease-in-out infinite;
+    .songkran-illustration {
+        width: 100%;
+        height: 100%;
+        display: block;
+        filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.2));
     }
-    .kid.girl { left: 20px; }
-    .kid.boy { right: 20px; animation-delay: -0.9s; }
-
-    .kid .head {
-        position: absolute;
-        width: 46px;
-        height: 46px;
-        background: #fde68a;
-        border-radius: 50%;
-        top: 10px;
-        left: 42px;
-        z-index: 3;
-    }
-    .kid.girl .head::before,
-    .kid.boy .head::before {
-        content: '';
-        position: absolute;
-        width: 48px;
-        height: 24px;
-        background: #111827;
-        top: -4px;
-        left: -1px;
-        border-radius: 24px 24px 12px 12px;
-    }
-    .kid.girl .head::after {
-        content: '';
-        position: absolute;
-        width: 13px;
-        height: 13px;
-        background: #ef4444;
-        border-radius: 50%;
-        left: -6px;
-        top: 8px;
-        box-shadow: 12px 2px 0 #f59e0b;
-    }
-
-    .kid .body {
-        position: absolute;
-        width: 62px;
-        height: 54px;
-        border-radius: 14px;
-        top: 54px;
-        left: 34px;
-    }
-    .kid.girl .body { background: #facc15; }
-    .kid.boy .body { background: #f43f5e; }
-
-    .kid .arm {
-        position: absolute;
-        width: 38px;
-        height: 14px;
-        background: #fde68a;
-        border-radius: 10px;
-        top: 72px;
-        z-index: 2;
-    }
-    .kid.girl .arm { left: 80px; transform: rotate(-8deg); }
-    .kid.boy .arm { right: 80px; transform: rotate(8deg); }
-
-    .kid .leg {
-        position: absolute;
-        width: 18px;
-        height: 40px;
-        background: #312e81;
-        top: 104px;
-        border-radius: 9px;
-    }
-    .kid.boy .leg { background: #3f3f46; }
-    .kid .leg.left { left: 42px; }
-    .kid .leg.right { left: 68px; }
-
-    .kid .gun {
-        position: absolute;
-        width: 52px;
-        height: 20px;
-        border-radius: 12px;
-        top: 70px;
-        z-index: 4;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .kid.girl .gun {
-        left: 88px;
-        background: linear-gradient(90deg, #ec4899, #f59e0b);
-    }
-    .kid.boy .gun {
-        right: 88px;
-        background: linear-gradient(90deg, #4338ca, #facc15);
-    }
-    .kid .gun::before {
-        content: '';
-        position: absolute;
-        width: 10px;
-        height: 18px;
-        background: #2563eb;
-        border-radius: 0 0 8px 8px;
-        top: 16px;
-        left: 18px;
-    }
-    .kid.girl .gun::after,
-    .kid.boy .gun::after {
-        content: '';
-        position: absolute;
-        width: 12px;
-        height: 8px;
-        background: #60a5fa;
-        border-radius: 99px;
-        top: 6px;
-    }
-    .kid.girl .gun::after { right: -8px; }
-    .kid.boy .gun::after { left: -8px; }
 
     .splash {
         position: absolute;
-        top: 78px;
+        top: 96px;
         left: 50%;
-        width: 220px;
-        height: 22px;
+        width: 240px;
+        height: 26px;
         transform: translateX(-50%);
         pointer-events: none;
     }
@@ -253,8 +143,8 @@
 
     @keyframes waterSpray {
         from {
-            opacity: 0.55;
-            border-top-width: 3px;
+            opacity: 0.5;
+            border-top-width: 2px;
             transform: translateY(2px) scaleX(0.96);
         }
         to {
@@ -263,9 +153,9 @@
             transform: translateY(-2px) scaleX(1.04);
         }
     }
-    @keyframes kidBounce {
+    @keyframes kidsFloat {
         0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
+        50% { transform: translateY(-6px); }
     }
 
     #water-canvas {
@@ -467,22 +357,53 @@
       <!-- Objects Container (Mixed depth) -->
       <div class="scene-objects">
         <div class="songkran-kids">
-          <div class="kid girl">
-            <div class="head"></div>
-            <div class="body"></div>
-            <div class="arm"></div>
-            <div class="leg left"></div>
-            <div class="leg right"></div>
-            <div class="gun"></div>
-          </div>
-          <div class="kid boy">
-            <div class="head"></div>
-            <div class="body"></div>
-            <div class="arm"></div>
-            <div class="leg left"></div>
-            <div class="leg right"></div>
-            <div class="gun"></div>
-          </div>
+          <svg class="songkran-illustration" viewBox="0 0 560 220" aria-hidden="true">
+            <g transform="translate(20,18)">
+              <path d="M70 102 C35 136, 32 163, 6 176 C44 180, 86 164, 109 136 Z" fill="#fde047"/>
+              <ellipse cx="92" cy="60" rx="36" ry="34" fill="#ffd8b5"/>
+              <circle cx="112" cy="30" r="18" fill="#0f172a"/>
+              <path d="M64 36 Q92 6 122 36 L122 48 L64 48 Z" fill="#111827"/>
+              <circle cx="104" cy="28" r="5" fill="#ef4444"/>
+              <circle cx="112" cy="33" r="5" fill="#facc15"/>
+              <ellipse cx="102" cy="70" rx="24" ry="10" fill="#f87171"/>
+              <rect x="60" y="92" width="74" height="48" rx="16" fill="#facc15"/>
+              <rect x="69" y="138" width="26" height="48" rx="12" fill="#3730a3"/>
+              <rect x="98" y="138" width="28" height="48" rx="12" fill="#4338ca"/>
+              <rect x="78" y="182" width="18" height="8" rx="4" fill="#ffd8b5"/>
+              <rect x="106" y="182" width="18" height="8" rx="4" fill="#ffd8b5"/>
+              <rect x="126" y="104" width="34" height="14" rx="7" fill="#ffd8b5"/>
+              <rect x="146" y="102" width="62" height="25" rx="12" fill="#ec4899"/>
+              <rect x="175" y="97" width="28" height="18" rx="9" fill="#facc15"/>
+              <rect x="198" y="106" width="22" height="8" rx="4" fill="#60a5fa"/>
+              <circle cx="175" cy="114" r="7" fill="#fde047"/>
+            </g>
+
+            <g transform="translate(304,22)">
+              <ellipse cx="84" cy="58" rx="36" ry="34" fill="#ffd8b5"/>
+              <path d="M50 34 Q88 0 118 30 Q116 48 84 50 Q56 50 50 34 Z" fill="#111827"/>
+              <ellipse cx="94" cy="68" rx="24" ry="10" fill="#f87171"/>
+              <rect x="52" y="88" width="76" height="50" rx="16" fill="#f43f5e"/>
+              <circle cx="62" cy="98" r="2" fill="#fff"/>
+              <circle cx="70" cy="112" r="2" fill="#fff"/>
+              <circle cx="84" cy="100" r="2" fill="#fff"/>
+              <circle cx="98" cy="110" r="2" fill="#fff"/>
+              <circle cx="112" cy="98" r="2" fill="#fff"/>
+              <rect x="62" y="136" width="28" height="50" rx="12" fill="#3f3f46"/>
+              <rect x="94" y="136" width="29" height="50" rx="12" fill="#52525b"/>
+              <rect x="64" y="182" width="20" height="8" rx="4" fill="#ffd8b5"/>
+              <rect x="98" y="182" width="20" height="8" rx="4" fill="#ffd8b5"/>
+              <rect x="22" y="102" width="34" height="14" rx="7" fill="#ffd8b5"/>
+              <rect x="-10" y="100" width="62" height="25" rx="12" fill="#4338ca"/>
+              <rect x="-8" y="105" width="28" height="15" rx="7" fill="#facc15"/>
+              <rect x="-20" y="108" width="12" height="8" rx="4" fill="#60a5fa"/>
+              <circle cx="18" cy="112" r="7" fill="#fde047"/>
+            </g>
+
+            <path d="M226 120 Q262 102 280 118 Q296 134 334 118" fill="none" stroke="#7dd3fc" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+            <circle cx="270" cy="116" r="4" fill="#bae6fd"/>
+            <circle cx="286" cy="122" r="3.5" fill="#bae6fd"/>
+            <circle cx="302" cy="116" r="4" fill="#bae6fd"/>
+          </svg>
           <div class="splash"></div>
         </div>
         
