@@ -93,62 +93,179 @@
         border-radius: 0 4px 4px 0;
     }
 
-    .bucket {
+    .songkran-kids {
         position: absolute;
-        bottom: 14%;
-        left: 16%;
-        width: 72px;
-        height: 52px;
-        background: linear-gradient(180deg, #f472b6 0%, #db2777 100%);
-        border-radius: 10px 10px 14px 14px;
-        border: 2px solid rgba(255,255,255,0.7);
+        left: 50%;
+        bottom: 10%;
+        width: 520px;
+        height: 180px;
+        transform: translateX(-50%);
         z-index: 8;
-        box-shadow: 0 6px 14px rgba(0,0,0,0.25);
     }
-    .bucket::before {
+    .kid {
+        position: absolute;
+        width: 130px;
+        height: 170px;
+        bottom: 0;
+        animation: kidBounce 1.8s ease-in-out infinite;
+    }
+    .kid.girl { left: 20px; }
+    .kid.boy { right: 20px; animation-delay: -0.9s; }
+
+    .kid .head {
+        position: absolute;
+        width: 46px;
+        height: 46px;
+        background: #fde68a;
+        border-radius: 50%;
+        top: 10px;
+        left: 42px;
+        z-index: 3;
+    }
+    .kid.girl .head::before,
+    .kid.boy .head::before {
         content: '';
-        position: relative;
-        display: block;
-        width: 54px;
-        height: 12px;
-        top: -9px;
-        left: 7px;
-        border: 2px solid rgba(255,255,255,0.75);
-        border-bottom: none;
-        border-radius: 10px 10px 0 0;
+        position: absolute;
+        width: 48px;
+        height: 24px;
+        background: #111827;
+        top: -4px;
+        left: -1px;
+        border-radius: 24px 24px 12px 12px;
+    }
+    .kid.girl .head::after {
+        content: '';
+        position: absolute;
+        width: 13px;
+        height: 13px;
+        background: #ef4444;
+        border-radius: 50%;
+        left: -6px;
+        top: 8px;
+        box-shadow: 12px 2px 0 #f59e0b;
     }
 
-    .water-gun {
+    .kid .body {
         position: absolute;
-        bottom: 14%;
-        width: 76px;
-        height: 26px;
-        background: linear-gradient(90deg, #2563eb, #22d3ee);
-        border-radius: 12px;
-        border: 2px solid rgba(255,255,255,0.75);
-        z-index: 8;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+        width: 62px;
+        height: 54px;
+        border-radius: 14px;
+        top: 54px;
+        left: 34px;
     }
-    .water-gun::before {
-        content:'';
-        position:absolute;
-        right: -18px;
-        top: 8px;
-        width: 22px;
-        height: 9px;
-        background: #0ea5e9;
-        border-radius: 8px;
-        border: 1px solid rgba(255,255,255,0.7);
+    .kid.girl .body { background: #facc15; }
+    .kid.boy .body { background: #f43f5e; }
+
+    .kid .arm {
+        position: absolute;
+        width: 38px;
+        height: 14px;
+        background: #fde68a;
+        border-radius: 10px;
+        top: 72px;
+        z-index: 2;
     }
-    .water-gun::after {
-        content:'';
-        position:absolute;
-        left: 20px;
-        top: 21px;
-        width: 16px;
+    .kid.girl .arm { left: 80px; transform: rotate(-8deg); }
+    .kid.boy .arm { right: 80px; transform: rotate(8deg); }
+
+    .kid .leg {
+        position: absolute;
+        width: 18px;
+        height: 40px;
+        background: #312e81;
+        top: 104px;
+        border-radius: 9px;
+    }
+    .kid.boy .leg { background: #3f3f46; }
+    .kid .leg.left { left: 42px; }
+    .kid .leg.right { left: 68px; }
+
+    .kid .gun {
+        position: absolute;
+        width: 52px;
         height: 20px;
-        background: #1d4ed8;
+        border-radius: 12px;
+        top: 70px;
+        z-index: 4;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .kid.girl .gun {
+        left: 88px;
+        background: linear-gradient(90deg, #ec4899, #f59e0b);
+    }
+    .kid.boy .gun {
+        right: 88px;
+        background: linear-gradient(90deg, #4338ca, #facc15);
+    }
+    .kid .gun::before {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 18px;
+        background: #2563eb;
         border-radius: 0 0 8px 8px;
+        top: 16px;
+        left: 18px;
+    }
+    .kid.girl .gun::after,
+    .kid.boy .gun::after {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 8px;
+        background: #60a5fa;
+        border-radius: 99px;
+        top: 6px;
+    }
+    .kid.girl .gun::after { right: -8px; }
+    .kid.boy .gun::after { left: -8px; }
+
+    .splash {
+        position: absolute;
+        top: 78px;
+        left: 50%;
+        width: 220px;
+        height: 22px;
+        transform: translateX(-50%);
+        pointer-events: none;
+    }
+    .splash::before,
+    .splash::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 46%;
+        height: 100%;
+        border-top: 4px solid rgba(125, 211, 252, 0.95);
+        border-radius: 50%;
+        filter: drop-shadow(0 0 6px rgba(186, 230, 253, 0.8));
+        animation: waterSpray 900ms infinite ease-in-out alternate;
+    }
+    .splash::before {
+        left: 0;
+        transform: rotate(6deg);
+    }
+    .splash::after {
+        right: 0;
+        transform: rotate(-6deg) scaleX(-1);
+        animation-delay: -450ms;
+    }
+
+    @keyframes waterSpray {
+        from {
+            opacity: 0.55;
+            border-top-width: 3px;
+            transform: translateY(2px) scaleX(0.96);
+        }
+        to {
+            opacity: 1;
+            border-top-width: 5px;
+            transform: translateY(-2px) scaleX(1.04);
+        }
+    }
+    @keyframes kidBounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
     }
 
     #water-canvas {
@@ -349,10 +466,25 @@
 
       <!-- Objects Container (Mixed depth) -->
       <div class="scene-objects">
-        <div class="bucket"></div>
-
-        <div class="water-gun" style="left: 24%; transform: rotate(-6deg);"></div>
-        <div class="water-gun" style="left: 33%; bottom: 16%; background: linear-gradient(90deg, #0f766e, #22c55e); transform: scale(0.95) rotate(10deg);"></div>
+        <div class="songkran-kids">
+          <div class="kid girl">
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="arm"></div>
+            <div class="leg left"></div>
+            <div class="leg right"></div>
+            <div class="gun"></div>
+          </div>
+          <div class="kid boy">
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="arm"></div>
+            <div class="leg left"></div>
+            <div class="leg right"></div>
+            <div class="gun"></div>
+          </div>
+          <div class="splash"></div>
+        </div>
         
         <div class="flag" style="right: 15%; bottom: 8%; z-index: 2; height: 110px;"></div>
       </div>
