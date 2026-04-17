@@ -69,7 +69,7 @@
         bottom: 0;
         width: 100%;
         height: 100%;
-        z-index: 2; /* Between BG hill and FG hill mostly, or tweaked individually */
+        z-index: 6; /* Keep Songkran props above foreground hill */
     }
 
     /* Festival flag */
@@ -95,24 +95,24 @@
 
     .bucket {
         position: absolute;
-        bottom: 4%;
-        left: 15%;
-        width: 56px;
-        height: 42px;
+        bottom: 14%;
+        left: 16%;
+        width: 72px;
+        height: 52px;
         background: linear-gradient(180deg, #f472b6 0%, #db2777 100%);
         border-radius: 10px 10px 14px 14px;
         border: 2px solid rgba(255,255,255,0.7);
-        z-index: 4;
+        z-index: 8;
         box-shadow: 0 6px 14px rgba(0,0,0,0.25);
     }
     .bucket::before {
         content: '';
         position: relative;
         display: block;
-        width: 42px;
-        height: 10px;
-        top: -8px;
-        left: 5px;
+        width: 54px;
+        height: 12px;
+        top: -9px;
+        left: 7px;
         border: 2px solid rgba(255,255,255,0.75);
         border-bottom: none;
         border-radius: 10px 10px 0 0;
@@ -120,22 +120,22 @@
 
     .water-gun {
         position: absolute;
-        bottom: 6%;
-        width: 64px;
-        height: 22px;
+        bottom: 14%;
+        width: 76px;
+        height: 26px;
         background: linear-gradient(90deg, #2563eb, #22d3ee);
         border-radius: 12px;
         border: 2px solid rgba(255,255,255,0.75);
-        z-index: 4;
+        z-index: 8;
         box-shadow: 0 4px 10px rgba(0,0,0,0.25);
     }
     .water-gun::before {
         content:'';
         position:absolute;
-        right: -16px;
-        top: 6px;
-        width: 20px;
-        height: 8px;
+        right: -18px;
+        top: 8px;
+        width: 22px;
+        height: 9px;
         background: #0ea5e9;
         border-radius: 8px;
         border: 1px solid rgba(255,255,255,0.7);
@@ -143,10 +143,10 @@
     .water-gun::after {
         content:'';
         position:absolute;
-        left: 18px;
-        top: 18px;
-        width: 14px;
-        height: 18px;
+        left: 20px;
+        top: 21px;
+        width: 16px;
+        height: 20px;
         background: #1d4ed8;
         border-radius: 0 0 8px 8px;
     }
@@ -352,7 +352,7 @@
         <div class="bucket"></div>
 
         <div class="water-gun" style="left: 24%; transform: rotate(-6deg);"></div>
-        <div class="water-gun" style="left: 31%; bottom: 7%; background: linear-gradient(90deg, #0f766e, #22c55e); transform: scale(0.9) rotate(10deg);"></div>
+        <div class="water-gun" style="left: 33%; bottom: 16%; background: linear-gradient(90deg, #0f766e, #22c55e); transform: scale(0.95) rotate(10deg);"></div>
         
         <div class="flag" style="right: 15%; bottom: 8%; z-index: 2; height: 110px;"></div>
       </div>
