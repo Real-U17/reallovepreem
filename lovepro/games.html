@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกมคลิกสนุกๆ</title>
+    <style>
+        /* นี่คือส่วน CSS ทำให้มันดูดีขึ้น */
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #game-area {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        #click-button {
+            font-size: 24px;
+            padding: 15px 30px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: transform 0.1s;
+        }
+        #click-button:active {
+            /* ทำให้ปุ่มดูเหมือนถูกกด */
+            transform: scale(0.95);
+        }
+        #score-display {
+            font-size: 48px;
+            margin: 20px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-area">
+        <h1>เกมคลิกแหลก!</h1>
+        <p>คลิกปุ่มข้างล่างให้เร็วที่สุด!</p>
+        
+        <div>คะแนนของคุณ:</div>
+        <div id="score-display">0</div>
+        
+        <button id="click-button">คลิกฉัน!</button>
+    </div>
+
+    <script>
+        // 1. หาปุ่มและที่แสดงคะแนนใน HTML
+        const button = document.getElementById('click-button');
+        const scoreDisplay = document.getElementById('score-display');
+        
+        // 2. สร้างตัวแปรเก็บคะแนน เริ่มที่ 0
+        let score = 0;
+        
+        // 3. สร้างฟังก์ชันที่จะทำงาน "เมื่อปุ่มถูกคลิก"
+        function whenButtonClicked() {
+            // เพิ่มคะแนนขึ้น 1
+            score = score + 1;
+            
+            // อัปเดตคะแนนบนหน้าจอ
+            scoreDisplay.textContent = score;
+        }
+        
+        // 4. สั่งให้ปุ่มรอฟัง "การคลิก" และเมื่อถูกคลิก ให้เรียกใช้ฟังก์ชัน
+        button.addEventListener('click', whenButtonClicked);
+    </script>
+
+</body>
+</html>
