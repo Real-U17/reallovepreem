@@ -3,9 +3,9 @@
 <head>
   <meta name="google-site-verification" content="byAwgB--YyEllRLN1j1JmhSalL_NTD4upUW9TF0EpJk" />
   <meta charset="UTF-8" />
-  <title>reallovepreem - Songkran Splash</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Kanit:wght@300;400&display=swap" rel="stylesheet">
+  <title>reallovepreem - Lofi Background</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -17,131 +17,18 @@
       height: 100vh;
       overflow: hidden;
       font-family: 'Kanit', system-ui, sans-serif;
-      background-color: #87ceeb;
+      background-color: #000;
     }
 
-    .scene {
+    /* วิดีโอพื้นหลัง */
+    .video-bg {
       position: fixed;
-      inset: 0;
-      background: linear-gradient(to bottom, #aee2ff 0%, #6bb9f0 50%, #f4d03f 50%, #f9e79f 100%);
-      overflow: hidden;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .wave {
-      position: absolute;
-      top: 45%;
+      top: 0;
       left: 0;
-      width: 200%;
-      height: 10%;
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 100%;
-      animation: wave-move 4s infinite alternate ease-in-out;
-    }
-
-    .wave:nth-child(2) {
-      top: 47%;
-      background: rgba(255, 255, 255, 0.2);
-      animation-delay: -2s;
-    }
-
-    @keyframes wave-move {
-      0% { transform: translateX(0) scaleY(1); }
-      100% { transform: translateX(-10%) scaleY(1.2); }
-    }
-
-    .songkran-title {
-      position: absolute;
-      top: 10%;
-      width: 100%;
-      text-align: center;
-      font-size: 3rem;
-      color: #fff;
-      text-shadow: 3px 3px 0 #ff6b81, -2px -2px 0 #4facfe;
-      z-index: 3;
-      animation: bounce-text 2s infinite ease-in-out;
-      letter-spacing: 2px;
-    }
-
-    @keyframes bounce-text {
-      0%, 100% { transform: translateY(0) rotate(-2deg); }
-      50% { transform: translateY(-10px) rotate(2deg); }
-    }
-
-    .characters {
-      position: absolute;
-      bottom: 8%;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      gap: 150px;
-      z-index: 5;
-    }
-
-    .character-wrapper {
-      position: relative;
-      width: 300px;
-      height: 350px;
-      animation: float 3s infinite ease-in-out;
-    }
-
-    .char-right { animation-delay: -1.5s; }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-
-    .water-stream {
-      position: absolute;
-      height: 15px;
-      border-radius: 10px;
-      background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
-      box-shadow: 0 0 10px rgba(0, 242, 254, 0.8);
-      opacity: 0.8;
-      z-index: 4;
-      pointer-events: none;
-    }
-
-    .stream-left {
-      top: 180px;
-      left: 220px;
-      width: 0;
-      animation: shoot-left 2s infinite ease-out;
-      transform-origin: left center;
-    }
-
-    @keyframes shoot-left {
-      0% { width: 0; opacity: 1; transform: translateX(0); }
-      40% { width: 350px; opacity: 0.8; transform: translateX(0) rotate(-5deg); }
-      80% { width: 100px; opacity: 0; transform: translateX(250px) rotate(-5deg); }
-      100% { width: 0; opacity: 0; }
-    }
-
-    .stream-right {
-      top: 200px;
-      right: 220px;
-      width: 0;
-      background: linear-gradient(-90deg, #43e97b 0%, #38f9d7 100%);
-      box-shadow: 0 0 10px rgba(56, 249, 215, 0.8);
-      animation: shoot-right 2s infinite ease-out;
-      animation-delay: -1s;
-      transform-origin: right center;
-    }
-
-    @keyframes shoot-right {
-      0% { width: 0; opacity: 1; transform: translateX(0); }
-      40% { width: 350px; opacity: 0.8; transform: translateX(0) rotate(5deg); }
-      80% { width: 100px; opacity: 0; transform: translateX(-250px) rotate(5deg); }
-      100% { width: 0; opacity: 0; }
-    }
-
-    .particle {
-      position: absolute;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 50%;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 0;
       pointer-events: none;
     }
 
@@ -152,285 +39,298 @@
         pointer-events: none; 
     }
 
-    .game-menu-container {
-        position: fixed;
-        right: 20px;
-        bottom: 550px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        z-index: 1000;
-        width: 170px;
-    }
-
-    .menu-label {
-        color: #ffb6c1;
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: -2px;
-        text-align: right;
-        opacity: 0.9;
-        text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
-    }
-
-    .game-btn {
-        position: relative;
-        padding: 12px 15px;
-        background: rgba(255, 20, 147, 0.15);
-        border: 1px solid rgba(255, 105, 180, 0.5);
-        backdrop-filter: blur(5px);
-        color: #fff;
-        text-decoration: none;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
-
-    .game-btn span {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 12px;
-        z-index: 2;
-        text-shadow: 0 0 2px rgba(255, 20, 147, 0.5);
-    }
-
-    .game-btn:hover {
-        background: rgba(255, 20, 147, 0.3);
-        border-color: rgba(255, 105, 180, 1);
-        box-shadow: 0 0 20px rgba(255, 20, 147, 0.6);
-        transform: translateX(-5px);
-    }
-
-    .game-btn::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; width: 0%; height: 100%;
-        background: linear-gradient(90deg, rgba(255, 20, 147, 0.4), transparent);
-        transition: width 0.3s;
-        z-index: 1;
-    }
-
-    .game-btn:hover::before {
-        width: 100%;
-    }
-
-    .menu-icon-block {
-        width: 14px;
-        height: 14px;
-        background: linear-gradient(135deg, #ff69b4, #bd00ff);
-        border-radius: 3px;
-        box-shadow: 0 0 8px rgba(255, 105, 180, 0.8);
-        z-index: 2;
-        position: relative;
-        border: 1px solid rgba(255,255,255,0.3);
-    }
-
-    #ui .love {
+    /* =========================================
+       สไตล์สำหรับกล่องเพลง (Desktop)
+       ========================================= */
+    .music-box {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: -225px 0 0 -225px;
-      --i: 1;
+      top: 65%;   
+      left: 31%;  
+      transform: translate(-50%, -50%);
+      
+      background: #18201a; 
+      border-radius: 16px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.1);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      pointer-events: auto; 
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .music-cover {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      margin-bottom: 20px;
+    }
+
+    .song-info { margin-bottom: 15px; }
+    .song-title {
+      font-size: 16px; font-weight: 600; margin-bottom: 4px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .song-artist {
+      font-size: 13px; color: #b3b3b3;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .progress-container { margin-bottom: 10px; position: relative; width: 100%; }
+    .time-labels {
+      display: flex; justify-content: space-between;
+      font-size: 10px; color: #a7a7a7; margin-top: 6px; font-weight: 300;
+    }
+
+    .controls-container {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 15px; padding: 0 5px;
+    }
+
+    .icon-btn {
+      background: none; border: none; color: #b3b3b3; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: 0.2s;
+    }
+    .icon-btn:hover { color: #fff; transform: scale(1.1); }
+    .icon-btn svg { width: 22px; height: 22px; fill: currentColor; }
+    .icon-btn.small-icon svg { width: 16px; height: 16px; }
+    .icon-btn.active { color: #1db954; } 
+
+    .play-btn {
+      background: #fff; color: #000; border: none; border-radius: 50%;
+      width: 48px; height: 48px; cursor: pointer; display: flex;
+      justify-content: center; align-items: center; transition: 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .play-btn:hover { transform: scale(1.05); background: #eee; }
+    .play-btn svg { width: 24px; height: 24px; fill: currentColor; }
+
+    .volume-container {
+      display: flex; align-items: center; gap: 10px; color: #b3b3b3;
+    }
+    .volume-container svg { width: 16px; height: 16px; fill: currentColor; }
+
+    input[type=range] {
+      -webkit-appearance: none; width: 100%; height: 4px; background: #4d4d4d;
+      border-radius: 2px; outline: none; cursor: pointer; position: relative;
+    }
+    input[type=range]::before {
+      content: ''; position: absolute; top: 0; left: 0; height: 100%;
+      background-color: #fff; border-radius: 2px; width: var(--progress, 0%);
       pointer-events: none;
     }
-    #ui .love:last-child .love_word {
-      color: #fff;
-      font-size: 2rem;
-      text-shadow: 0 0 10px #ea80b0;
+    input[type=range]:hover::before { background-color: #1db954; }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 12px; height: 12px; background: #fff;
+      border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      opacity: 0; transition: opacity 0.2s;
     }
-    #ui .love:last-child .love_word {
-        color: #ea80b0;
-        font-size: 1.4rem;
-        text-shadow: 0 0 10px #fff;
+    input[type=range]:hover::-webkit-slider-thumb { opacity: 1; }
+
+    /* =========================================
+       เมนูเกม (Desktop)
+       ========================================= */
+    .game-menu-container {
+        position: fixed; right: 20px; bottom: 50px; display: flex;
+        flex-direction: column; gap: 12px; z-index: 1000; width: 170px;
+        transition: all 0.3s ease;
+    }
+    .menu-label {
+        color: #ffb6c1; font-size: 10px; text-transform: uppercase;
+        letter-spacing: 2px; margin-bottom: -2px; text-align: right;
+        opacity: 0.9; text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+    }
+    .game-btn {
+        position: relative; padding: 12px 15px; background: rgba(255, 20, 147, 0.15);
+        border: 1px solid rgba(255, 105, 180, 0.5); backdrop-filter: blur(5px);
+        color: #fff; text-decoration: none; border-radius: 12px; transition: all 0.3s ease;
+        display: flex; align-items: center; justify-content: space-between;
+        overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    .game-btn span {
+        font-family: 'Orbitron', sans-serif; font-size: 12px; z-index: 2;
+        text-shadow: 0 0 2px rgba(255, 20, 147, 0.5);
+    }
+    .game-btn:hover {
+        background: rgba(255, 20, 147, 0.3); border-color: rgba(255, 105, 180, 1);
+        box-shadow: 0 0 20px rgba(255, 20, 147, 0.6); transform: translateX(-5px);
+    }
+    .game-btn::before {
+        content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%;
+        background: linear-gradient(90deg, rgba(255, 20, 147, 0.4), transparent);
+        transition: width 0.3s; z-index: 1;
+    }
+    .game-btn:hover::before { width: 100%; }
+    .menu-icon-block {
+        width: 14px; height: 14px; background: linear-gradient(135deg, #ff69b4, #bd00ff);
+        border-radius: 3px; box-shadow: 0 0 8px rgba(255, 105, 180, 0.8);
+        z-index: 2; position: relative; border: 1px solid rgba(255,255,255,0.3);
     }
 
+    /* =========================================
+       หัวใจหมุน (Desktop)
+       ========================================= */
+    #ui .love {
+      position: absolute; top: 50%; left: 50%; margin: -225px 0 0 -225px;
+      --i: 1; pointer-events: none;
+    }
+    /* ลบโค้ดหัวใจสีขาวทิ้งไปแล้ว */
     #ui .love_word {
-      color: #ea80b0;
-      font-size: 1.4rem;
-      transform: translateY(-100%) rotateZ(-30deg);
-      text-shadow: 0 0 10px #fff;
-      letter-spacing: 2px;
-      white-space: nowrap;
+      color: #ea80b0; font-size: 1.4rem; transform: translateY(-100%) rotateZ(-30deg);
+      text-shadow: 0 0 10px #fff; letter-spacing: 2px; white-space: nowrap;
     }
-    #ui .love_horizontal {
-      animation: horizontal 10000ms infinite alternate ease-in-out;
-      animation-delay: calc(var(--i) * -300ms);
-    }
-    #ui .love_vertical {
-      animation: vertical 20000ms infinite linear;
-      animation-delay: calc(var(--i) * -300ms);
-    }
+    #ui .love_horizontal { animation: horizontal 10000ms infinite alternate ease-in-out; animation-delay: calc(var(--i) * -300ms); }
+    #ui .love_vertical { animation: vertical 20000ms infinite linear; animation-delay: calc(var(--i) * -300ms); }
 
-    @keyframes horizontal {
-      from { transform: translateX(0px); }
-      to   { transform: translateX(450px); }
-    }
+    @keyframes horizontal { from { transform: translateX(0px); } to { transform: translateX(450px); } }
     @keyframes vertical {
-      0%   { transform: translateY(180px); }
-      10%  { transform: translateY(45px); }
-      15%  { transform: translateY(4.5px); }
-      18%  { transform: translateY(0px); }
-      20%  { transform: translateY(4.5px); }
-      22%  { transform: translateY(34.61538px); }
-      24%  { transform: translateY(64.28571px); }
-      25%  { transform: translateY(112.5px); }
-      26%  { transform: translateY(64.28571px); }
-      28%  { transform: translateY(34.61538px); }
-      30%  { transform: translateY(4.5px); }
-      32%  { transform: translateY(0px); }
-      35%  { transform: translateY(4.5px); }
-      40%  { transform: translateY(45px); }
-      50%  { transform: translateY(180px); }
-      71%  { transform: translateY(428.57143px); }
-      72.5%{ transform: translateY(441.17647px); }
-      75%  { transform: translateY(450px); }
-      77.5%{ transform: translateY(441.17647px); }
-      79%  { transform: translateY(428.57143px); }
-      100% { transform: translateY(180px); }
+      0% { transform: translateY(180px); } 10% { transform: translateY(45px); } 15% { transform: translateY(4.5px); }
+      18% { transform: translateY(0px); } 20% { transform: translateY(4.5px); } 22% { transform: translateY(34.61538px); }
+      24% { transform: translateY(64.28571px); } 25% { transform: translateY(112.5px); } 26% { transform: translateY(64.28571px); }
+      28% { transform: translateY(34.61538px); } 30% { transform: translateY(4.5px); } 32% { transform: translateY(0px); }
+      35% { transform: translateY(4.5px); } 40% { transform: translateY(45px); } 50% { transform: translateY(180px); }
+      71% { transform: translateY(428.57143px); } 72.5%{ transform: translateY(441.17647px); } 75% { transform: translateY(450px); }
+      77.5%{ transform: translateY(441.17647px); } 79% { transform: translateY(428.57143px); } 100% { transform: translateY(180px); }
     }
 
+    /* =========================================
+       สไตล์เฉพาะสำหรับ "มือถือ" (Mini Player แบบลอยขอบล่าง)
+       ========================================= */
     @media screen and (max-width: 768px) {
-        .characters {
-            gap: 20px;
-            transform: scale(0.7);
-            bottom: 5%;
-        }
-        .songkran-title {
-            font-size: 2rem;
-        }
-        .stream-left { animation: shoot-left-mobile 2s infinite ease-out; }
-        .stream-right { animation: shoot-right-mobile 2s infinite ease-out; }
-
-        @keyframes shoot-left-mobile {
-            0% { width: 0; opacity: 1; }
-            40% { width: 150px; opacity: 0.8; }
-            80% { width: 50px; opacity: 0; transform: translateX(100px); }
-            100% { width: 0; opacity: 0; }
-        }
-        @keyframes shoot-right-mobile {
-            0% { width: 0; opacity: 1; }
-            40% { width: 150px; opacity: 0.8; }
-            80% { width: 50px; opacity: 0; transform: translateX(-100px); }
-            100% { width: 0; opacity: 0; }
-        }
-
-        .game-menu-container {
-            bottom: 120px; 
-            right: 20px;   
-            width: 150px; 
+        .music-box { 
+            position: fixed;
+            top: auto; 
+            bottom: 0; 
+            left: 0; 
             transform: none; 
-            align-items: flex-end; 
+            width: 100%; 
+            max-width: 100%;
+            border-radius: 16px 16px 0 0; 
+            padding: 10px 15px;
+            flex-direction: row; 
+            align-items: center;
+            background: rgba(24, 32, 26, 0.95); 
+            backdrop-filter: blur(15px);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+            z-index: 100;
         }
-        
-        .menu-label {
-            display: block; 
-            font-size: 9px;
+
+        .music-cover {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 0;
+            margin-right: 12px;
+            border-radius: 8px;
+        }
+
+        .song-info { 
+            margin-bottom: 0; 
+            flex-grow: 1; 
+        }
+        .song-title { font-size: 14px; margin-bottom: 2px; }
+        .song-artist { font-size: 11px; }
+
+        .controls-container .small-icon,
+        .volume-container,
+        .time-labels {
+            display: none !important;
+        }
+
+        .controls-container {
+            margin-bottom: 0;
+            width: auto;
+            gap: 15px; 
+            padding: 0;
+        }
+
+        .play-btn {
+            width: 40px; height: 40px;
+        }
+        .play-btn svg { width: 20px; height: 20px; }
+
+        .progress-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            margin-bottom: 0;
+        }
+        input[type=range] {
+            height: 2px; 
+            border-radius: 0;
+            background: rgba(255,255,255,0.1);
+        }
+        input[type=range]::-webkit-slider-thumb { display: none; } 
+
+        .game-menu-container { 
+            top: 20px; 
+            bottom: auto; 
+            right: 15px; 
+            width: auto; 
+        }
+
+        #ui {
+            transform: scale(0.6);
+            transform-origin: center center;
         }
     }
   </style>
 </head>
 <body>
 
-  <div class="scene" id="scene">
-      <div class="wave"></div>
-      <div class="wave"></div>
-      <h1 class="songkran-title">💦 สุขสันต์วันสงกรานต์ 💦</h1>
+  <video class="video-bg" autoplay loop muted playsinline>
+    <source src="1000040238.mp4" type="video/mp4">
+  </video>
 
-      <div class="characters">
-          <div class="character-wrapper char-left">
-              <svg viewBox="0 0 300 400" width="100%" height="100%">
-                  <rect x="110" y="320" width="30" height="50" rx="15" fill="#111"/>
-                  <rect x="160" y="320" width="30" height="50" rx="15" fill="#111"/>
-                  <path d="M 80,220 Q 150,200 220,220 L 240,320 Q 150,340 60,320 Z" fill="#e0f7fa"/>
-                  <circle cx="100" cy="250" r="10" fill="#ff8da1"/>
-                  <circle cx="130" cy="290" r="12" fill="#ff8da1"/>
-                  <circle cx="180" cy="260" r="9" fill="#ff8da1"/>
-                  <circle cx="210" cy="300" r="11" fill="#ff8da1"/>
-                  <rect x="135" y="220" width="30" height="100" fill="#111"/>
-                  <path d="M 180,240 Q 230,260 250,230" stroke="#e0f7fa" stroke-width="30" stroke-linecap="round" fill="none"/>
-                  <circle cx="250" cy="230" r="15" fill="#ffe0e5"/>
-                  <g fill="#ffb6c1">
-                      <circle cx="150" cy="150" r="80" />
-                      <circle cx="80" cy="150" r="40" />
-                      <circle cx="220" cy="150" r="40" />
-                      <circle cx="100" cy="90" r="45" />
-                      <circle cx="200" cy="90" r="45" />
-                      <circle cx="150" cy="60" r="45" />
-                      <circle cx="70" cy="200" r="35" />
-                      <circle cx="230" cy="200" r="35" />
-                  </g>
-                  <ellipse cx="150" cy="160" rx="65" ry="55" fill="#fff0f5"/>
-                  <path d="M 110,150 Q 125,140 140,155" stroke="#111" stroke-width="6" fill="none" stroke-linecap="round"/>
-                  <circle cx="125" cy="160" r="8" fill="#111"/>
-                  <path d="M 160,155 Q 175,140 190,150" stroke="#111" stroke-width="6" fill="none" stroke-linecap="round"/>
-                  <path d="M 165,160 L 185,160" stroke="#111" stroke-width="6" fill="none" stroke-linecap="round"/>
-                  <path d="M 140,185 Q 150,190 160,185" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
-                  <ellipse cx="105" cy="175" rx="10" ry="6" fill="#ff99a8" opacity="0.6"/>
-                  <ellipse cx="195" cy="175" rx="10" ry="6" fill="#ff99a8" opacity="0.6"/>
-                  <g transform="translate(190, 200)">
-                      <rect x="0" y="20" width="80" height="25" rx="5" fill="#222"/>
-                      <rect x="20" y="45" width="20" height="30" rx="5" fill="#222"/>
-                      <ellipse cx="15" cy="15" rx="20" ry="15" fill="#ff6b81"/>
-                      <circle cx="85" cy="32" r="5" fill="#00f2fe"/>
-                  </g>
-                  <path d="M 170,280 Q 190,320 210,280 Z" fill="#ffb6c1"/>
-                  <text x="180" y="295" font-size="12" font-weight="bold" fill="#111" transform="rotate(-15, 180, 295)">PREEM</text>
-              </svg>
-              <div class="water-stream stream-left"></div>
-          </div>
-
-          <div class="character-wrapper char-right">
-              <svg viewBox="0 0 300 400" width="100%" height="100%">
-                  <rect x="120" y="320" width="35" height="40" rx="15" fill="#c0392b"/>
-                  <rect x="170" y="320" width="35" height="40" rx="15" fill="#c0392b"/>
-                  <path d="M 90,230 Q 160,210 230,230 L 250,330 Q 160,350 70,330 Z" fill="#b3e5fc"/>
-                  <path d="M 100,260 L 110,250 L 120,260 L 110,270 Z" fill="#ffd54f"/>
-                  <path d="M 190,290 L 200,280 L 210,290 L 200,300 Z" fill="#ff8da1"/>
-                  <circle cx="150" cy="300" r="8" fill="#fff"/>
-                  <path d="M 160,240 Q 100,260 80,230" stroke="#b3e5fc" stroke-width="30" stroke-linecap="round" fill="none"/>
-                  <circle cx="80" cy="230" r="15" fill="#ffe0e5"/>
-                  <path d="M 60,160 C 60,50 260,50 260,160 C 260,240 60,240 60,160 Z" fill="#ffffff"/>
-                  <path d="M 110,120 Q 150,100 210,140 Q 160,80 110,120 Z" fill="#facc15"/>
-                  <path d="M 180,120 Q 210,100 240,150 Q 220,100 180,120 Z" fill="#ca8a04"/>
-                  <g transform="translate(130, 80) scale(0.8)">
-                      <circle cx="0" cy="0" r="30" fill="#eee"/>
-                      <path d="M 0,0 L 30,0 A 30 30 0 0 0 0,-30 Z" fill="#e74c3c"/>
-                      <path d="M 0,0 L 0,-30 A 30 30 0 0 0 -30,0 Z" fill="#f1c40f"/>
-                      <path d="M 0,0 L -30,0 A 30 30 0 0 0 0,30 Z" fill="#3498db"/>
-                      <path d="M 0,0 L 0,30 A 30 30 0 0 0 30,0 Z" fill="#2ecc71"/>
-                      <circle cx="0" cy="0" r="5" fill="#fff"/>
-                  </g>
-                  <ellipse cx="180" cy="170" rx="50" ry="45" fill="#fff0f5"/>
-                  <path d="M 145,160 Q 155,150 165,160" stroke="#111" stroke-width="5" fill="none" stroke-linecap="round"/>
-                  <path d="M 190,155 Q 210,145 210,170 Q 190,170 190,155 Z" fill="#111"/>
-                  <circle cx="205" cy="160" r="4" fill="#fff"/>
-                  <path d="M 165,185 Q 175,195 185,180" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>
-                  <ellipse cx="140" cy="175" rx="8" ry="5" fill="#ff99a8" opacity="0.6"/>
-                  <ellipse cx="220" cy="175" rx="8" ry="5" fill="#ff99a8" opacity="0.6"/>
-                  <g transform="translate(-10, 200)">
-                      <rect x="30" y="20" width="90" height="25" rx="5" fill="#4caf50"/>
-                      <rect x="80" y="45" width="20" height="30" rx="5" fill="#388e3c"/>
-                      <circle cx="75" cy="15" r="18" fill="#fff"/>
-                      <path d="M 57,15 A 18 18 0 0 1 93,15" fill="#ffca28"/>
-                      <path d="M 57,15 A 18 18 0 0 0 93,15" fill="#ef5350"/>
-                      <circle cx="75" cy="15" r="5" fill="#42a5f5"/>
-                      <circle cx="25" cy="32" r="5" fill="#38f9d7"/>
-                  </g>
-              </svg>
-              <div class="water-stream stream-right"></div>
-          </div>
+  <!-- Music Box -->
+  <div class="music-box" id="musicBox">
+    <div class="progress-container">
+      <input type="range" id="seekSlider" value="0" min="0" max="100" step="0.1" style="--progress: 0%">
+      <div class="time-labels">
+        <span id="currentTimeLabel">0:00</span>
+        <span id="durationLabel">-0:00</span>
       </div>
+    </div>
+
+    <img src="image_2c59d2.png" class="music-cover" alt="Album Cover">
+    
+    <div class="song-info">
+      <div class="song-title">Real Love Preem</div>
+      <div class="song-artist">Good Season! Good Things!</div>
+    </div>
+
+    <div class="controls-container">
+      <button class="icon-btn small-icon active" title="Shuffle"><svg viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg></button>
+      <button class="icon-btn" title="Previous"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+      
+      <button class="play-btn" id="playBtn">
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      
+      <button class="icon-btn" title="Next"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+      <button class="icon-btn small-icon active" title="Repeat"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg></button>
+    </div>
+
+    <div class="volume-container">
+      <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+      <input type="range" id="volSlider" value="50" min="0" max="100" step="1" style="--progress: 50%">
+      <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+    </div>
+
+    <audio id="bgAudio" loop autoplay>
+      <source src="song.mp3" type="audio/mpeg">
+    </audio>
   </div>
 
   <div id="ui"></div>
 
   <div class="game-menu-container">
       <div class="menu-label">GAMES LIST</div>
-      
       <a href="real-blck.html" class="game-btn">
           <span>REAL BLOCK</span>
           <div class="menu-icon-block"></div>
@@ -438,74 +338,120 @@
   </div>
 
   <script>
+    // สร้างหัวใจ
     const N = 100; 
     const ui = document.getElementById('ui');
-
     for (let i = 1; i <= N; i++) {
       const love = document.createElement('div');
       love.className = 'love';
       love.style.setProperty('--i', i);
-
       const h = document.createElement('div');
       h.className = 'love_horizontal';
-
       const v = document.createElement('div');
       v.className = 'love_vertical';
-
       const word = document.createElement('div');
       word.className = 'love_word';
       word.textContent = 'Real love Preem';
-
       v.appendChild(word);
       h.appendChild(v);
       love.appendChild(h);
       ui.appendChild(love);
     }
 
-    function createSplash(scene, x, y, direction) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
+    // โค้ดควบคุม Music Player
+    const audio = document.getElementById('bgAudio');
+    const playBtn = document.getElementById('playBtn');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const seekSlider = document.getElementById('seekSlider');
+    const currentTimeLabel = document.getElementById('currentTimeLabel');
+    const durationLabel = document.getElementById('durationLabel');
+    const volSlider = document.getElementById('volSlider');
 
-      const size = Math.random() * 8 + 4;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
+    audio.volume = 0.5;
 
-      const colors = ['#00f2fe', '#4facfe', '#ffffff', '#38f9d7'];
-      particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      particle.style.left = `${x}px`;
-      particle.style.top = `${y}px`;
-      scene.appendChild(particle);
-
-      const angle = (Math.random() * 45 - 22.5) * (Math.PI / 180);
-      const velocity = Math.random() * 50 + 50;
-      const dirMultiplier = direction === 'right' ? 1 : -1;
-      const endX = x + (Math.cos(angle) * velocity * 3 * dirMultiplier);
-      const endY = y + (Math.sin(angle) * velocity * 3) + 100;
-
-      particle.animate([
-        { transform: 'translate(0, 0) scale(1)', opacity: 0.8 },
-        { transform: `translate(${endX - x}px, ${endY - y}px) scale(0)`, opacity: 0 }
-      ], {
-        duration: Math.random() * 500 + 500,
-        easing: 'cubic-bezier(.25,.8,.25,1)'
-      }).onfinish = () => particle.remove();
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return "0:00";
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return m + ':' + (s < 10 ? '0' + s : s);
     }
 
-    const scene = document.getElementById('scene');
-
-    setInterval(() => {
-      const isMobile = window.innerWidth <= 768;
-      const centerX = window.innerWidth / 2;
-      const leftGunX = isMobile ? centerX - 60 : centerX - 120;
-      const leftGunY = window.innerHeight * 0.7;
-      const rightGunX = isMobile ? centerX + 60 : centerX + 120;
-      const rightGunY = window.innerHeight * 0.72;
-
-      for (let i = 0; i < 3; i++) {
-        setTimeout(() => createSplash(scene, leftGunX, leftGunY, 'right'), Math.random() * 200);
-        setTimeout(() => createSplash(scene, rightGunX, rightGunY, 'left'), Math.random() * 200 + 1000);
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+      } else {
+        audio.pause();
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
       }
-    }, 300);
+    }
+
+    playBtn.addEventListener('click', togglePlay);
+
+    audio.addEventListener('loadedmetadata', () => {
+      durationLabel.textContent = "-" + formatTime(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (!isNaN(audio.duration)) {
+        currentTimeLabel.textContent = formatTime(audio.currentTime);
+        const timeLeft = audio.duration - audio.currentTime;
+        durationLabel.textContent = "-" + formatTime(timeLeft);
+        const progress = (audio.currentTime / audio.duration) * 100;
+        seekSlider.value = progress;
+        seekSlider.style.setProperty('--progress', `${progress}%`);
+      }
+    });
+
+    seekSlider.addEventListener('input', () => {
+      const seekTo = (seekSlider.value / 100) * audio.duration;
+      audio.currentTime = seekTo;
+      seekSlider.style.setProperty('--progress', `${seekSlider.value}%`);
+    });
+
+    volSlider.addEventListener('input', () => {
+      audio.volume = volSlider.value / 100;
+      volSlider.style.setProperty('--progress', `${volSlider.value}%`);
+    });
+
+    // ==========================================
+    // ทริกเล่นเพลงอัตโนมัติแบบรุกฆาต (ขั้นสุด)
+    // ==========================================
+    
+    // 1. ลองเล่นทันทีที่หน้าเว็บโหลดเสร็จ
+    const playAudio = () => {
+      let playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          playIcon.style.display = 'none';
+          pauseIcon.style.display = 'block';
+        }).catch(error => {
+          console.log("Autoplay blocked. Waiting for interaction.");
+        });
+      }
+    };
+    window.addEventListener('load', playAudio);
+
+    // 2. ถ้าข้อ 1 โดนบล็อก ดักจับการกระทำทุกอย่าง (แตะ, คลิก, เลื่อนหน้าจอ) แม้แต่ครั้งเดียวเพลงก็จะเล่น
+    const forcePlayOnInteraction = () => {
+      if (audio.paused) {
+        audio.play().then(() => {
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+        }).catch(e => console.log(e));
+      }
+      // ลบตัวดักจับออกหลังทำงานครั้งแรกเสร็จ จะได้ไม่กวนระบบปุ่ม
+      document.removeEventListener('click', forcePlayOnInteraction);
+      document.removeEventListener('touchstart', forcePlayOnInteraction);
+      document.removeEventListener('scroll', forcePlayOnInteraction);
+    };
+
+    document.addEventListener('click', forcePlayOnInteraction);
+    document.addEventListener('touchstart', forcePlayOnInteraction);
+    document.addEventListener('scroll', forcePlayOnInteraction);
   </script>
 </body>
 </html>
