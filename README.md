@@ -19,3 +19,9 @@ Fish alongside your favorite Kirby Dream Friends, including Gooey, Marx, Waddle 
 Explore a variety of stages, discover and collect every unique fish, complete your Fishbook, and build your own Aquarium!
 
 Kirby ~ Soft & Wet is available now on Windows, Android, and your Web Browser!
+
+## 🎮 Play Online
+
+**[Play Kirby ~ Soft & Wet](https://megastrimp.github.io/Kirby-Soft-and-Wet/)**
+
+Click the link above to play the game directly in your browser!
